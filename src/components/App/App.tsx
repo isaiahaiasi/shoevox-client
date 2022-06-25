@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import {
   BrowserRouter, Navigate, Route, Routes,
 } from 'react-router-dom';
@@ -17,9 +17,7 @@ function App() {
   return (
     <BrowserRouter>
       <div>
-        Auth status:
-        {' '}
-        {authStatus.toString()}
+        Auth status: {authStatus.toString()}
       </div>
       <Routes>
         <Route path="/" element={WelcomeRoute} />

@@ -5,6 +5,7 @@ extends:
   - plugin:react/recommended
   - airbnb
   - airbnb-typescript
+  - plugin:react/jsx-runtime # Disables issues wrt React not being in scope
 parser: "@typescript-eslint/parser"
 parserOptions:
   ecmaFeatures:
@@ -14,11 +15,14 @@ parserOptions:
   project: ./tsconfig.json
 plugins:
   - react
-  - "@typescript-eslint"
+  - "@typescript-eslint" # This doesn't seem to load correctly?
 settings:
   react:
     version: detect
+  packageManager: pnpm
 ignorePatterns:
   - vite.config.ts
 rules:
-  react/react-in-jsx-scope: 0
+  # These rules do more harm than good to JSX legibility, in my opinion.
+  no-nested-ternary: 0
+  react/jsx-one-expression-per-line: 0
