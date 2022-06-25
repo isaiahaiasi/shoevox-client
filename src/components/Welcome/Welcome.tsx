@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../AuthProvider';
 
 export default function Welcome() {
-  const [,setAuthStatus] = useContext(AuthContext);
+  const [, setAuthStatus] = useContext(AuthContext);
 
   function handleClick() {
     if (setAuthStatus) {

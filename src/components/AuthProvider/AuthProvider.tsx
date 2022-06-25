@@ -6,9 +6,9 @@ interface Props {
   children: React.ReactNode;
 }
 
-export const AuthContext = createContext<
-[boolean, Dispatch<SetStateAction<boolean>> | null]
->([false, null]);
+type ContextType = [boolean, Dispatch<SetStateAction<boolean>> | null];
+
+export const AuthContext = createContext<ContextType>([false, null]);
 
 export default function AuthProvider({ children }: Props) {
   const authState = useState(false);
