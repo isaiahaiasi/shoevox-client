@@ -9,20 +9,24 @@ interface UseGoogleLoginParams {
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const client_id = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 const googleClientScriptSrc = 'https://accounts.google.com/gsi/client';
+const gapiScriptSrc = 'https://apis.google.com/js/platform.js?onload=init';
 
 export default function useGoogleLogin({
   onSuccess = () => {},
   onFailure = () => {},
 }:UseGoogleLoginParams) {
   const clientRef = useRef<any>();
-  const isLoaded = useLoadScript(googleClientScriptSrc);
+  const isClientLoaded = useLoadScript(googleClientScriptSrc);
+  const isGapiLoaded = useLoadScript(gapiScriptSrc);
+
+  const googleScriptsLoaded = isClientLoaded && isGapiLoaded;
 
   const initCallback = (res: any) => {
     console.log('[google id init result]', res);
   };
 
   useEffect(() => {
-    if (!isLoaded) {
+    if (!googleScriptsLoaded) {
       return;
     }
 
@@ -31,7 +35,9 @@ export default function useGoogleLogin({
       callback: initCallback,
     });
 
-    const client = (window as any).google?.accounts.oauth2.initTokenClient({
+    const { oauth2 } = (window as any).google.accounts;
+
+    const client = oauth2.initTokenClient({
       client_id,
       scope: 'openid profile email',
       callback: (res: any) => {
@@ -44,7 +50,7 @@ export default function useGoogleLogin({
     });
 
     clientRef.current = client;
-  }, [isLoaded]);
+  }, [googleScriptsLoaded]);
 
   const loginImplicitFlow = useCallback(
     () => clientRef.current.requestAccessToken(),

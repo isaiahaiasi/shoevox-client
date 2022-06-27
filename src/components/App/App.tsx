@@ -10,16 +10,14 @@ import Welcome from '../Welcome';
 import './App.scss';
 
 function App() {
-  const [authStatus] = useContext(AuthContext);
+  const [user] = useContext(AuthContext);
+  const authStatus = !!user;
 
   const WelcomeRoute = !authStatus ? <Welcome /> : <Navigate to="/dashboard" />;
   const DashboardRoute = authStatus ? <Dashboard /> : <Navigate to="/" />;
 
   return (
     <BrowserRouter>
-      <div>
-        Auth status: {authStatus.toString()}
-      </div>
       <GoogleAuth />
       <Routes>
         <Route path="/" element={WelcomeRoute} />
