@@ -4,6 +4,7 @@ import {
 } from 'react-router-dom';
 import { AuthContext } from '../AuthProvider';
 import Dashboard from '../Dashboard';
+import GoogleAuth from '../GoogleAuth';
 import NotFound from '../NotFound';
 import Welcome from '../Welcome';
 import './App.scss';
@@ -19,6 +20,7 @@ function App() {
       <div>
         Auth status: {authStatus.toString()}
       </div>
+      <GoogleAuth />
       <Routes>
         <Route path="/" element={WelcomeRoute} />
         <Route path="/dashboard" element={DashboardRoute} />
