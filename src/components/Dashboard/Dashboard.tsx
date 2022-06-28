@@ -1,7 +1,7 @@
 import { QueryFunction, useInfiniteQuery } from 'react-query';
 import PaginatedData from '../PaginatedData';
 
-const ROOM_URL = `${import.meta.env.VITE_API_URL}/v1/rooms?limit=5`;
+const ROOM_URL = `${import.meta.env.VITE_API_URL}/rooms?limit=5`;
 
 const fetchRooms: QueryFunction<any, 'dashboard'> = async ({ pageParam }) => {
   const url = pageParam ? `${ROOM_URL}&cursor=${pageParam}` : ROOM_URL;

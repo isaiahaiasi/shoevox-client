@@ -4,7 +4,7 @@ import {
 } from 'react-router-dom';
 import { AuthContext } from '../AuthProvider';
 import Dashboard from '../Dashboard';
-import GoogleAuth from '../GoogleAuth';
+import GoogleLogin from '../GoogleLogin';
 import NotFound from '../NotFound';
 import Welcome from '../Welcome';
 import './App.scss';
@@ -18,7 +18,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <GoogleAuth />
+      <GoogleLogin />
       <Routes>
         <Route path="/" element={WelcomeRoute} />
         <Route path="/dashboard" element={DashboardRoute} />

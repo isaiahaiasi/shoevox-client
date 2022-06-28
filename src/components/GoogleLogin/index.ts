@@ -1,4 +1,4 @@
 /* eslint-disable no-restricted-exports */
 /* eslint-disable import/export */
-export * from './GoogleAuth';
-export { default } from './GoogleAuth';
+export * from './GoogleLogin';
+export { default } from './GoogleLogin';

@@ -2,9 +2,12 @@ import {
   createContext, Dispatch, SetStateAction, useState,
 } from 'react';
 
+type Provider = 'google';
+
 interface User {
-  accessToken: string;
+  token: string;
   username: string;
+  provider: Provider;
 }
 
 interface Props {
