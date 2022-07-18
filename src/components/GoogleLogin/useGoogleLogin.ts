@@ -12,9 +12,9 @@ const googleClientScriptSrc = 'https://accounts.google.com/gsi/client';
 const gapiScriptSrc = 'https://apis.google.com/js/platform.js?onload=init';
 
 export default function useGoogleLogin({
-  onSuccess = () => {},
-  onFailure = () => {},
-}:UseGoogleLoginParams) {
+  onSuccess = () => { },
+  onFailure = () => { },
+}: UseGoogleLoginParams) {
   // const clientRef = useRef<any>();
   const isClientLoaded = useLoadScript(googleClientScriptSrc);
   const isGapiLoaded = useLoadScript(gapiScriptSrc);
@@ -42,6 +42,7 @@ export default function useGoogleLogin({
       client_id,
       callback: handleCredentialResponse,
       ux_mode: 'redirect',
+      itp_support: true,
     });
 
     // const { oauth2 } = (window as any).google.accounts;

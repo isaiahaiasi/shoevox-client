@@ -3,9 +3,6 @@ import { AuthContext } from '../AuthProvider';
 import useGoogleLogin from './useGoogleLogin';
 
 // TODO: This should probably be a custom hook wrapping React-Query
-// TODO: Probably want to send username in the body?
-// TODO: Not sure how I want to format this endpoint, tbh
-// TODO: I need a way to share API Spec between client & server, prob make it an npm package...
 async function putUser(idToken: string) {
   return fetch(`${import.meta.env.VITE_API_URL}/users?provider=google`, {
     method: 'post',
