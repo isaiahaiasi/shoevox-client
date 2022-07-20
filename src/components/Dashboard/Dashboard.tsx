@@ -1,47 +1,30 @@
-import { QueryFunction, useInfiniteQuery } from 'react-query';
-import PaginatedData from '../PaginatedData';
+import { QueryFunction } from 'react-query';
+import { ApiPageData, RoomDto } from '../../types/apiTypes';
+import Feed from '../Feed';
+import Room from '../Room';
+
+// TODO: I could probably make this *more* generic, and have feeds for each
+// Schema type (Rooms, Comments), where the only thing I need to supply is the
+// query identifier (which I can use as the key, and to grab the query function)
 
 const ROOM_URL = `${import.meta.env.VITE_API_URL}/rooms?limit=5`;
+const queryKey = 'dashboard';
 
-const fetchRooms: QueryFunction<any, 'dashboard'> = async ({ pageParam }) => {
+type FetchRooms = QueryFunction<ApiPageData<RoomDto>, typeof queryKey>;
+
+const fetchRooms: FetchRooms = async ({ pageParam }) => {
   const url = pageParam ? `${ROOM_URL}&cursor=${pageParam}` : ROOM_URL;
   const res = await fetch(url);
   return res.json();
+  // TODO: validate via Zod schemas, once those are added to Spec lib
+};
+
+const render = {
+  success: (room: RoomDto) => <Room key={room.id} room={room} />,
+  error: () => <div>Something went wrong!</div>,
+  loading: () => <div>Loading...</div>,
 };
 
 export default function Dashboard() {
-  const {
-    data,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-    status,
-  } = useInfiniteQuery(
-    'dashboard',
-    fetchRooms,
-    { getNextPageParam: (lastPage) => lastPage.links.next?.cursor },
-  );
-
-  switch (status) {
-    case 'error': return <div>Something went wrong!</div>;
-    case 'loading': return <div>Loading...</div>;
-    case 'success':
-      return (
-        <div>
-          <PaginatedData
-            data={data}
-            renderFn={(room: any) => (
-              <div key={room.id}>{room.title}</div>)}
-          />
-          <button
-            type="button"
-            disabled={!hasNextPage || isFetchingNextPage}
-            onClick={() => fetchNextPage()}
-          >
-            {isFetchingNextPage ? 'Loading...' : hasNextPage ? 'Load more' : 'No more!'}
-          </button>
-        </div>
-      );
-    default: return <div>Default case. Not sure what happened here...</div>;
-  }
+  return <Feed queryFn={fetchRooms} queryKey={queryKey} render={render} />;
 }

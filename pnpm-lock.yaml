@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@isaiahaiasi/voxelatlas-spec': ^0.1.11
   '@types/react': ^18.0.0
   '@types/react-dom': ^18.0.0
   '@typescript-eslint/eslint-plugin': ^5.29.0
@@ -24,6 +25,7 @@ specifiers:
   vitest: ^0.15.2
 
 dependencies:
+  '@isaiahaiasi/voxelatlas-spec': 0.1.11
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-query: 3.39.1_biqbaboplfbrettd7655fr4n2y
@@ -356,6 +358,11 @@ packages:
   /@humanwhocodes/object-schema/1.2.1:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
+
+  /@isaiahaiasi/voxelatlas-spec/0.1.11:
+    resolution: {integrity: sha512-ONjrkP/AlKpHbaTbGGlBAOtqg/14CJq2O9EXLGNnVp0k1pN8jnWQFEuktM+TXqFORREGiMKQpFc4mwCib4ztzw==}
+    engines: {node: '>=16.0.0'}
+    dev: false
 
   /@jridgewell/gen-mapping/0.1.1:
     resolution: {integrity: sha512-sQXCasFk+U8lWYEe66WxRDOE9PjVz4vSM51fTu3Hw+ClTpUSQb718772vH3pyS5pShp6lvQM7SxgIDXXXmOX7w==}
