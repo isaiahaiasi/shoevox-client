@@ -1,8 +1,7 @@
-import { RoomDto } from '../../types/apiTypes';
+import { Dto } from '@isaiahaiasi/voxelatlas-spec';
 
-// TODO: typing
 interface RoomProps {
-  room: RoomDto;
+  room: Dto['Room'];
 }
 
 export default function Room({ room }: RoomProps) {
