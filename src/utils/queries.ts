@@ -27,7 +27,7 @@ function getQueryString(query?: Record<string, any>) {
   if (query) {
     queryString += Object.entries(query)
       .filter(([, v]) => v != null)
-      .map(([k, v]) => `${k}=${v}`)
+      .map(([k, v]) => `${k}=${encodeURIComponent(v)}`)
       .join('&');
   }
 
