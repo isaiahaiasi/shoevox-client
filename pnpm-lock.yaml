@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@isaiahaiasi/voxelatlas-spec': ^0.1.11
+  '@isaiahaiasi/voxelatlas-spec': ^0.2.7
   '@types/react': ^18.0.0
   '@types/react-dom': ^18.0.0
   '@typescript-eslint/eslint-plugin': ^5.29.0
@@ -23,13 +23,15 @@ specifiers:
   typescript: ^4.6.3
   vite: ^2.9.9
   vitest: ^0.15.2
+  zod: ^3.17.9
 
 dependencies:
-  '@isaiahaiasi/voxelatlas-spec': 0.1.11
+  '@isaiahaiasi/voxelatlas-spec': 0.2.7
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-query: 3.39.1_biqbaboplfbrettd7655fr4n2y
   react-router-dom: 6.3.0_biqbaboplfbrettd7655fr4n2y
+  zod: 3.17.9
 
 devDependencies:
   '@types/react': 18.0.14
@@ -359,9 +361,12 @@ packages:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
 
-  /@isaiahaiasi/voxelatlas-spec/0.1.11:
-    resolution: {integrity: sha512-ONjrkP/AlKpHbaTbGGlBAOtqg/14CJq2O9EXLGNnVp0k1pN8jnWQFEuktM+TXqFORREGiMKQpFc4mwCib4ztzw==}
+  /@isaiahaiasi/voxelatlas-spec/0.2.7:
+    resolution: {integrity: sha512-PjvYhY53orvIMjL41NyNuBc/qWzjpuy2ef3zQCjNEIh8EZAOCQHTYEIWUN1B+jtfLVoodljGBf0flc4Xyokrsg==}
     engines: {node: '>=16.0.0'}
+    dependencies:
+      typescript: 4.7.4
+      zod: 3.17.9
     dev: false
 
   /@jridgewell/gen-mapping/0.1.1:
@@ -2587,7 +2592,6 @@ packages:
     resolution: {integrity: sha512-C0WQT0gezHuw6AdY1M2jxUO83Rjf0HP7Sk1DtXj6j1EwkQNZrHAg2XPWlq62oqEhYvONq5pkC2Y9oPljWToLmQ==}
     engines: {node: '>=4.2.0'}
     hasBin: true
-    dev: true
 
   /unbox-primitive/1.0.2:
     resolution: {integrity: sha512-61pPlCD9h51VoreyJ0BReideM3MDKMKnh6+V9L08331ipq6Q8OFXZYiqP6n/tbHx4s5I9uRhcye6BrbkizkBDw==}
@@ -2715,3 +2719,7 @@ packages:
   /yallist/4.0.0:
     resolution: {integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==}
     dev: true
+
+  /zod/3.17.9:
+    resolution: {integrity: sha512-QF1843pYoRk1jFP+/UiEySXaTSiIyFod3KyDzoO3qHKGZdX7z7RNXI4lEsiibvpnIZQwcDVU58ZrxP4pQ7BmTQ==}
+    dev: false

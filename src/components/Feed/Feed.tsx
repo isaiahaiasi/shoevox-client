@@ -1,21 +1,21 @@
 /* eslint-disable react/require-default-props */
+import { RootPaginatedResponse } from '@isaiahaiasi/voxelatlas-spec';
 import { QueryFunction, useInfiniteQuery } from 'react-query';
-import { ApiPageData, RootApiObject } from '../../types/apiTypes';
 import PaginatedData from '../PaginatedData';
 
-interface FeedProps<T extends RootApiObject, S extends string> {
-  queryFn: QueryFunction<ApiPageData<T>, S>;
+interface FeedProps<T extends RootPaginatedResponse, S extends string> {
+  queryFn: QueryFunction<T, S>;
   queryKey: S;
   render: {
     error: () => React.ReactNode;
     loading: () => React.ReactNode;
-    success: (data: T) => React.ReactNode;
+    success: (data: T['data'][number]) => React.ReactNode;
   };
   className?: string;
   style?: React.CSSProperties;
 }
 
-export default function Feed<T extends RootApiObject, S extends string>({
+export default function Feed<T extends RootPaginatedResponse, S extends string>({
   queryFn,
   queryKey,
   render,

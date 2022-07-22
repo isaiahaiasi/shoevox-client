@@ -8,7 +8,14 @@ async function putUser(idToken: string) {
     method: 'post',
     headers: {
       authorization: `Bearer ${idToken}`,
+      Accept: 'application/json, text/plain, */*',
+      'Content-Type': 'application/json',
     },
+    // API definition expects a custom username to be sent,
+    // however, this has not yet been implemented on either the client or the server.
+    body: JSON.stringify({
+      username: 'TEMP TEMP TEMP',
+    }),
   }).then((apiRes) => apiRes.json());
 }
 
