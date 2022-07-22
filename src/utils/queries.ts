@@ -1,36 +1,99 @@
-import { OperationId, operations, zSchemas } from '@isaiahaiasi/voxelatlas-spec';
+import {
+  OperationId, operations, zSchemas,
+} from '@isaiahaiasi/voxelatlas-spec';
 import { QueryFunction } from 'react-query';
 import { z } from 'zod';
 
-const { responses } = zSchemas;
+type GenericRequestData = {
+  params?: Record<string, any>;
+  query?: Record<string, any>;
+};
 
-const GLOBAL_LIMIT = 5;
+const { responses, requests } = zSchemas;
 
-export function getPaginatedQuery<OpId extends OperationId>(operationId: OpId) {
-  type QueryData = z.infer<typeof responses[typeof operationId]>;
+const DEFAULT_LIMIT = 5;
 
-  const endpoint = import.meta.env.VITE_API_URL + operations[operationId].path;
+function interpolateParams(path: string, params?: Record<string, string>) {
+  if (!params) return path;
 
-  const queryFn: QueryFunction<QueryData, OpId> = ({ pageParam }) => {
-    const cursorQuery = pageParam ? `&cursor=${pageParam}` : '';
-    const url = `${endpoint}?limit=${GLOBAL_LIMIT}${cursorQuery}`;
+  return path.replace(/\{.*?\}/g, (param) => {
+    const paramName = param.slice(1, -1);
+    return encodeURIComponent(params[paramName]);
+  });
+}
 
-    return fetch(url)
-      .then((result) => result.json())
-      .then((result) => responses[operationId].parse(result));
-  };
+function getQueryString(query?: Record<string, any>) {
+  let queryString = '?';
+  if (query) {
+    queryString += Object.entries(query)
+      .filter(([, v]) => v != null)
+      .map(([k, v]) => `${k}=${v}`)
+      .join('&');
+  }
+
+  // avoid sending just '?' if given empty query object
+  return queryString !== '?' ? queryString : '';
+}
+
+export function getUrl<T extends OperationId>(
+  operationId: T,
+  { query, params }: GenericRequestData,
+) {
+  const queryString = getQueryString(query);
+
+  const path = interpolateParams(operations[operationId].path, params);
+
+  return import.meta.env.VITE_API_URL + path + queryString;
+}
+
+export function getQuery<OpId extends OperationId>(
+  operationId: OpId,
+  reqData: z.infer<typeof requests[OpId]>,
+  reqOptions?: RequestInit,
+) {
+  // I immediately cast because I can't use the *intersection* of the generic type.
+  // However, being able to infer the precise type requestData should be
+  // when I'm passing in arguments is very useful,
+  // so I *do* include the generic typing for requestData in the signature.
+  const { query, params } = reqData as GenericRequestData;
+
+  const url = getUrl(operationId, { query, params });
+
+  type QueryData = z.infer<typeof responses[OpId]>;
+
+  const queryFn: QueryFunction<QueryData, OpId> = () => fetch(url, reqOptions)
+    .then((res) => res.json())
+    .then((res) => responses[operationId].parse(res));
 
   return queryFn;
 }
 
-export function getQuery<OpId extends OperationId>(operationId: OpId) {
-  type QueryData = z.infer<typeof responses[typeof operationId]>;
+export function getPaginatedQuery<OpId extends OperationId>(
+  operationId: OpId,
+  reqData: z.infer<typeof requests[OpId]>,
+  requestInit?: RequestInit,
+) {
+  const { query, params } = reqData as GenericRequestData;
 
-  const endpoint = import.meta.env.VITE_API_URL + operations[operationId].path;
+  type QueryResponseData = z.infer<typeof responses[OpId]>;
 
-  const queryFn: QueryFunction<QueryData, OpId> = () => fetch(endpoint)
-    .then((res) => res.json())
-    .then((res) => responses[operationId].parse(res));
+  const queryFn: QueryFunction<QueryResponseData, OpId> = async ({ pageParam }) => {
+    const cursor = pageParam;
+    const paginatedQueryParams = {
+      limit: DEFAULT_LIMIT,
+      ...query,
+      cursor,
+    };
+    const url = getUrl(operationId, { params, query: paginatedQueryParams });
+
+    // I might need to "deep merge" local request options & `requestInit` param
+    // in order to prevent sub-options from being overwritten.
+    const { method } = operations[operationId];
+
+    return fetch(url, { method, ...requestInit })
+      .then((result) => result.json())
+      .then((result) => responses[operationId].parse(result));
+  };
 
   return queryFn;
 }
