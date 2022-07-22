@@ -3,9 +3,7 @@ import { RootPaginatedResponse } from '@isaiahaiasi/voxelatlas-spec';
 import { QueryFunction, useInfiniteQuery } from 'react-query';
 import PaginatedData from '../PaginatedData';
 
-// TODO: fix in lib.
-type RootPageResponse = RootPaginatedResponse & { data: any[] };
-interface FeedProps<T extends RootPageResponse, S extends string> {
+interface FeedProps<T extends RootPaginatedResponse, S extends string> {
   queryFn: QueryFunction<T, S>;
   queryKey: S;
   render: {
@@ -17,7 +15,7 @@ interface FeedProps<T extends RootPageResponse, S extends string> {
   style?: React.CSSProperties;
 }
 
-export default function Feed<T extends RootPageResponse, S extends string>({
+export default function Feed<T extends RootPaginatedResponse, S extends string>({
   queryFn,
   queryKey,
   render,
