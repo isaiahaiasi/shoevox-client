@@ -61,7 +61,7 @@ export function getQuery<OpId extends OperationId>(
 
   type QueryData = z.infer<typeof responses[OpId]>;
 
-  const queryFn: QueryFunction<QueryData, OpId> = () => fetch(url, reqOptions)
+  const queryFn: QueryFunction<QueryData> = () => fetch(url, reqOptions)
     .then((res) => res.json())
     .then((res) => responses[operationId].parse(res));
 
@@ -77,7 +77,7 @@ export function getPaginatedQuery<OpId extends OperationId>(
 
   type QueryResponseData = z.infer<typeof responses[OpId]>;
 
-  const queryFn: QueryFunction<QueryResponseData, OpId> = async ({ pageParam }) => {
+  const queryFn: QueryFunction<QueryResponseData> = async ({ pageParam }) => {
     const cursor = pageParam;
     const paginatedQueryParams = {
       limit: DEFAULT_LIMIT,

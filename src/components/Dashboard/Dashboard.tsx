@@ -1,21 +1,17 @@
-import { Dto } from '@isaiahaiasi/voxelatlas-spec';
-import { useGetPaginatedQuery } from '../../hooks/useGetQuery';
+import { PaginatedResponseData } from '@isaiahaiasi/voxelatlas-spec';
 import Feed from '../Feed';
 import Room from '../Room';
 
-const OPERATION = 'getRooms';
+const operationId = 'getRooms';
 
 const render = {
-  success: (room: Dto['Room']) => <Room key={room.id} room={room} />,
+  success: (room: PaginatedResponseData<typeof operationId>) => <Room key={room.id} room={room} />,
   error: () => <div>Something went wrong!</div>,
   loading: () => <div>Loading...</div>,
 };
 
-export default function Dashboard() {
-  const queryFn = useGetPaginatedQuery(OPERATION, { query: { limit: '15' } });
+const reqData = { query: { limit: '15' } };
 
-  // This looks like queryFn can be derived from OPERATION alone,
-  // but currently there's no way to distinguish OPERATIONs that return paginated responses,
-  // so I can't guarantee that the queryFn I get will extend RootPaginatedResponse
-  return <Feed queryFn={queryFn} queryKey={OPERATION} render={render} />;
+export default function Dashboard() {
+  return <Feed reqData={reqData} operationId={operationId} render={render} />;
 }

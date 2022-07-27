@@ -1,5 +1,4 @@
-import { Dto } from '@isaiahaiasi/voxelatlas-spec';
-import { useGetPaginatedQuery } from '../../hooks/useGetQuery';
+import { Dto, PaginatedResponseData } from '@isaiahaiasi/voxelatlas-spec';
 import Feed from '../Feed';
 
 interface CommentFeedProps {
@@ -21,10 +20,13 @@ function Comment({ comment }: CommentProps) {
   );
 }
 
-const OPERATION = 'getCommentsByRoomId';
+const operationId = 'getCommentsByRoomId';
 
 const render = {
-  success: (comment: Dto['Comment']) => <Comment key={comment.id} comment={comment} />,
+  // eslint-disable-next-line arrow-body-style
+  success: (comment: PaginatedResponseData<typeof operationId>) => {
+    return <Comment key={comment.id} comment={comment} />;
+  },
   error: () => <div>Something went wrong!</div>,
   loading: () => <div>Loading...</div>,
 };
@@ -35,12 +37,10 @@ export default function CommentFeed({ roomId }: CommentFeedProps) {
     query: { limit: '3' },
   };
 
-  const queryFn = useGetPaginatedQuery(OPERATION, reqData);
-
   return (
     <div>
       <h3>Comments</h3>
-      <Feed queryFn={queryFn} queryKey={OPERATION} render={render} />
+      <Feed reqData={reqData} operationId={operationId} render={render} />
     </div>
   );
 }

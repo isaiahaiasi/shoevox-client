@@ -1,27 +1,33 @@
 /* eslint-disable react/require-default-props */
-import { RootPaginatedResponse } from '@isaiahaiasi/voxelatlas-spec';
-import { QueryFunction, useInfiniteQuery } from 'react-query';
+import { PaginatedOperationId, zSchemas, PaginatedResponseData } from '@isaiahaiasi/voxelatlas-spec';
+import { useInfiniteQuery } from 'react-query';
+import { z } from 'zod';
+import { useGetPaginatedQuery } from '../../hooks/useGetQuery';
+import { getUrl } from '../../utils/queries';
 import PaginatedData from '../PaginatedData';
 
-interface FeedProps<T extends RootPaginatedResponse, S extends string> {
-  queryFn: QueryFunction<T, S>;
-  queryKey: S;
+interface FeedProps<S extends PaginatedOperationId> {
+  operationId: S;
+  reqData: z.infer<typeof zSchemas.requests[S]>;
   render: {
     error: () => React.ReactNode;
     loading: () => React.ReactNode;
-    success: (data: T['data'][number]) => React.ReactNode;
+    success: (data: PaginatedResponseData<S>) => React.ReactNode;
   };
   className?: string;
   style?: React.CSSProperties;
 }
 
-export default function Feed<T extends RootPaginatedResponse, S extends string>({
-  queryFn,
-  queryKey,
+export default function Feed<S extends PaginatedOperationId>({
+  reqData,
+  operationId,
   render,
   className,
   style,
-}: FeedProps<T, S>) {
+}: FeedProps<S>) {
+  const queryKey = getUrl(operationId, reqData).split('?')[0];
+  const queryFn = useGetPaginatedQuery(operationId, reqData);
+
   const {
     data,
     fetchNextPage,
