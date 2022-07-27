@@ -6,6 +6,7 @@ import { AuthContext } from '../AuthProvider';
 import Dashboard from '../Dashboard';
 import GoogleLogin from '../GoogleLogin';
 import NotFound from '../NotFound';
+import RoomPage from '../RoomPage';
 import Welcome from '../Welcome';
 import './App.scss';
 
@@ -13,16 +14,27 @@ function App() {
   const [user] = useContext(AuthContext);
   const authStatus = !!user;
 
-  const WelcomeRoute = !authStatus ? <Welcome /> : <Navigate to="/dashboard" />;
-  const DashboardRoute = authStatus ? <Dashboard /> : <Navigate to="/" />;
+  const LoggedOutRoutes = (
+    <>
+      <Route path="/" element={<Welcome />} />
+      <Route path="*" element={<Navigate to="/" />} />
+    </>
+  );
+
+  const loggedInRoutes = (
+    <>
+      <Route path="/" element={<Navigate to="/dashboard" />} />,
+      <Route path="/dashboard" element={<Dashboard />} />,
+      <Route path="/r/:roomid" element={<RoomPage />} />,
+      <Route path="*" element={<NotFound />} />,
+    </>
+  );
 
   return (
     <BrowserRouter>
       <GoogleLogin />
       <Routes>
-        <Route path="/" element={WelcomeRoute} />
-        <Route path="/dashboard" element={DashboardRoute} />
-        <Route path="*" element={<NotFound />} />
+        {authStatus ? loggedInRoutes : LoggedOutRoutes}
       </Routes>
     </BrowserRouter>
   );

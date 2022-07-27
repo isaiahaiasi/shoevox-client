@@ -6,10 +6,25 @@ interface CommentFeedProps {
   roomId: string;
 }
 
+interface CommentProps {
+  comment: Dto['Comment'];
+}
+
+function Comment({ comment }: CommentProps) {
+  const { content, user, createdAt } = comment;
+
+  return (
+    <div>
+      <div>{content}</div>
+      <div>posted by {user.username} on {createdAt}</div>
+    </div>
+  );
+}
+
 const OPERATION = 'getCommentsByRoomId';
 
 const render = {
-  success: (comment: Dto['Comment']) => <div key={comment.id}>{comment.content}</div>,
+  success: (comment: Dto['Comment']) => <Comment key={comment.id} comment={comment} />,
   error: () => <div>Something went wrong!</div>,
   loading: () => <div>Loading...</div>,
 };
@@ -22,5 +37,10 @@ export default function CommentFeed({ roomId }: CommentFeedProps) {
 
   const queryFn = useGetPaginatedQuery(OPERATION, reqData);
 
-  return <Feed queryFn={queryFn} queryKey={OPERATION} render={render} />;
+  return (
+    <div>
+      <h3>Comments</h3>
+      <Feed queryFn={queryFn} queryKey={OPERATION} render={render} />
+    </div>
+  );
 }
