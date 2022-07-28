@@ -1,4 +1,5 @@
 import { Dto, PaginatedResponseData } from '@isaiahaiasi/voxelatlas-spec';
+import { Link } from 'react-router-dom';
 import Feed from '../Feed';
 
 interface CommentFeedProps {
@@ -15,7 +16,7 @@ function Comment({ comment }: CommentProps) {
   return (
     <div>
       <div>{content}</div>
-      <div>posted by {user.username} on {createdAt}</div>
+      <div>posted by <Link to={`/u/${user.id}`}>{user.username}</Link> on {createdAt}</div>
     </div>
   );
 }

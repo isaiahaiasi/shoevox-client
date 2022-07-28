@@ -10,7 +10,7 @@ const render = {
   loading: () => <div>Loading...</div>,
 };
 
-const reqData = { query: { limit: '15' } };
+const reqData = { query: { limit: '10' } };
 
 export default function Dashboard() {
   return <Feed reqData={reqData} operationId={operationId} render={render} />;
