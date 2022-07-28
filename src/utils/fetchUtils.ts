@@ -47,10 +47,10 @@ export function getUrl<T extends OperationId>(
   return import.meta.env.VITE_API_URL + path + queryString;
 }
 
-export function getQuery<OpId extends OperationId>(
+export function getFetch<OpId extends OperationId>(
   operationId: OpId,
   reqData: z.infer<typeof requests[OpId]>,
-  reqOptions?: RequestInit,
+  requestInit?: RequestInit,
 ) {
   // I immediately cast because I can't use the *intersection* of the generic type.
   // However, being able to infer the precise type requestData should be
@@ -62,14 +62,14 @@ export function getQuery<OpId extends OperationId>(
 
   type QueryData = z.infer<typeof responses[OpId]>;
 
-  const queryFn: QueryFunction<QueryData> = () => fetch(url, reqOptions)
+  const queryFn: QueryFunction<QueryData> = () => fetch(url, requestInit)
     .then((res) => res.json())
     .then((res) => responses[operationId].parse(res));
 
   return queryFn;
 }
 
-export function getPaginatedQuery<OpId extends OperationId>(
+export function getInfiniteFetch<OpId extends OperationId>(
   operationId: OpId,
   reqData: z.infer<typeof requests[OpId]>,
   requestInit?: RequestInit,

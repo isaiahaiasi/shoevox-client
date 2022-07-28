@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { getUrl } from './queries';
+import { getUrl } from './fetchUtils';
 
 const urlBase = import.meta.env.VITE_API_URL;
 

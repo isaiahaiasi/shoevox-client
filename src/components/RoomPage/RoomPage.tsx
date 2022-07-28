@@ -1,6 +1,6 @@
 import { Dto } from '@isaiahaiasi/voxelatlas-spec';
 import { useParams } from 'react-router-dom';
-import { useGetQuery } from '../../hooks/useGetQuery';
+import { useFetch } from '../../hooks/useFetch';
 import CommentFeed from '../CommentFeed';
 import Room from '../Room/Room';
 
@@ -19,7 +19,7 @@ export default function RoomPage() {
 
   const reqData = { params: { roomid } };
 
-  const { data: roomData, status: roomStatus } = useGetQuery('getRoomById', reqData);
+  const { data: roomData, status: roomStatus } = useFetch('getRoomById', reqData);
 
   return (
     <div>

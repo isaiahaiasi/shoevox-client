@@ -1,7 +1,7 @@
 /* eslint-disable react/require-default-props */
 import { PaginatedOperationId, zSchemas, PaginatedResponseData } from '@isaiahaiasi/voxelatlas-spec';
 import { z } from 'zod';
-import { useGetPaginatedQuery } from '../../hooks/useGetQuery';
+import { useInfiniteFetch } from '../../hooks/useFetch';
 import PaginatedData from '../PaginatedData';
 
 interface FeedProps<S extends PaginatedOperationId> {
@@ -29,7 +29,7 @@ export default function Feed<S extends PaginatedOperationId>({
     hasNextPage,
     isFetchingNextPage,
     status,
-  } = useGetPaginatedQuery(operationId, reqData);
+  } = useInfiniteFetch(operationId, reqData);
 
   // TODO: Verify 'idle' status removed in v4 of react-query
   switch (status) {

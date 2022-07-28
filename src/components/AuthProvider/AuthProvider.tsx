@@ -4,7 +4,7 @@ import {
 
 type Provider = 'google';
 
-interface User {
+export interface User {
   token: string;
   username: string;
   provider: Provider;
