@@ -1,24 +1,9 @@
-import { Dto, PaginatedResponseData } from '@isaiahaiasi/voxelatlas-spec';
-import { Link } from 'react-router-dom';
+import { PaginatedResponseData } from '@isaiahaiasi/voxelatlas-spec';
+import Comment from '../Comment/Comment';
 import Feed from '../Feed';
 
 interface CommentFeedProps {
   roomId: string;
-}
-
-interface CommentProps {
-  comment: Dto['Comment'];
-}
-
-function Comment({ comment }: CommentProps) {
-  const { content, user, createdAt } = comment;
-
-  return (
-    <div>
-      <div>{content}</div>
-      <div>posted by <Link to={`/u/${user.id}`}>{user.username}</Link> on {createdAt}</div>
-    </div>
-  );
 }
 
 const operationId = 'getCommentsByRoomId';
