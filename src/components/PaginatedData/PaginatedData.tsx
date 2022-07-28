@@ -1,6 +1,6 @@
 import { PaginatedOperationId, PaginatedResponse, PaginatedResponseData } from '@isaiahaiasi/voxelatlas-spec';
 import React from 'react';
-import { InfiniteData } from 'react-query';
+import { InfiniteData } from '@tanstack/react-query';
 
 interface PaginatedDataProps<S extends PaginatedOperationId> {
   data: InfiniteData<PaginatedResponse<S>>,

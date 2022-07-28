@@ -1,12 +1,13 @@
 import {
   OperationId, operations, zSchemas,
 } from '@isaiahaiasi/voxelatlas-spec';
-import { QueryFunction } from 'react-query';
+import { QueryFunction } from '@tanstack/react-query';
 import { z } from 'zod';
 
 type GenericRequestData = {
   params?: Record<string, any>;
   query?: Record<string, any>;
+  body?: Record<string, any>;
 };
 
 const { responses, requests } = zSchemas;

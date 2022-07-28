@@ -11,9 +11,10 @@
   },
   "dependencies": {
     "@isaiahaiasi/voxelatlas-spec": "^0.2.10",
+    "@tanstack/react-query": "^4.0.10",
+    "@tanstack/react-query-devtools": "^4.0.10",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-query": "^3.39.1",
     "react-router-dom": "6",
     "zod": "^3.17.9"
   },
