@@ -1,12 +1,18 @@
 import { Dto } from '@isaiahaiasi/voxelatlas-spec';
+import { Container } from '@mui/material';
 import { useParams } from 'react-router-dom';
+import ErrorAlert from '../ErrorAlert';
 import Feed from '../Feed';
 import Room from '../Room';
+import { FeedSkeleton, RoomSkeleton } from '../Skeletons';
+
+const operationId = 'getRoomsByUserId';
+const limit = 5;
 
 const render = {
-  success: (room: Dto['Room']) => <Room key={room.id} room={room} />,
-  error: () => <div>Sorry, something went wrong!</div>,
-  loading: () => <div>Loading...</div>,
+  error: () => <ErrorAlert />,
+  loading: () => <FeedSkeleton count={limit} skeleton={<RoomSkeleton />} />,
+  success: (room: Dto['Room']) => <Room room={room} />,
 };
 
 export default function UserFeed() {
@@ -16,6 +22,11 @@ export default function UserFeed() {
     throw new Error('Could not find userid in url path, which is required for UserFeed component!');
   }
 
-  const reqData = { params: { userid }, query: {} };
-  return <Feed operationId="getRoomsByUserId" reqData={reqData} render={render} />;
+  const reqData = { params: { userid }, query: { limit: String(limit) } };
+
+  return (
+    <Container maxWidth="md">
+      <Feed reqData={reqData} operationId={operationId} render={render} />
+    </Container>
+  );
 }

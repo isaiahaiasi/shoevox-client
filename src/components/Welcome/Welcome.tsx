@@ -1,12 +1,14 @@
+import { Typography } from "@mui/material";
+
 export default function Welcome() {
   return (
     <div className="fancy-bg">
       <header>
-        <h1>
+        <Typography variant="h1">
           Welcome to
           {' '}
           <span className="fancy-text">ShoeVox</span>
-        </h1>
+        </Typography>
       </header>
       <div className="cool-example" />
     </div>

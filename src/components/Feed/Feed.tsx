@@ -1,5 +1,5 @@
-/* eslint-disable react/require-default-props */
 import { PaginatedOperationId, zSchemas, PaginatedResponseData } from '@isaiahaiasi/voxelatlas-spec';
+import { Button } from '@mui/material';
 import { z } from 'zod';
 import { useInfiniteFetch } from '../../hooks/useFetch';
 import PaginatedData from '../PaginatedData';
@@ -12,16 +12,12 @@ interface FeedProps<S extends PaginatedOperationId> {
     loading: () => React.ReactNode;
     success: (data: PaginatedResponseData<S>) => React.ReactNode;
   };
-  className?: string;
-  style?: React.CSSProperties;
 }
 
 export default function Feed<S extends PaginatedOperationId>({
   reqData,
   operationId,
   render,
-  className,
-  style,
 }: FeedProps<S>) {
   const {
     data,
@@ -31,26 +27,25 @@ export default function Feed<S extends PaginatedOperationId>({
     status,
   } = useInfiniteFetch(operationId, reqData);
 
-  // TODO: Verify 'idle' status removed in v4 of react-query
   switch (status) {
     case 'error':
     case 'loading':
-      return <div className={className} style={style}>{render[status]()}</div>;
+      return <>{render[status]()}</>;
     case 'success':
       return (
-        <div className={className} style={style}>
+        <>
           <PaginatedData
-            data={data}
+            pages={data.pages}
             renderFn={render.success}
           />
-          <button
-            type="button"
+          <Button
+            variant="contained"
             disabled={!hasNextPage || isFetchingNextPage}
             onClick={() => fetchNextPage()}
           >
             {isFetchingNextPage ? 'Loading...' : hasNextPage ? 'Load more' : 'No more!'}
-          </button>
-        </div>
+          </Button>
+        </>
       );
     default:
       throw new Error(`Unhandled status ${status}!`);

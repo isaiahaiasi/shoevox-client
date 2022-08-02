@@ -1,32 +1,33 @@
-import { PaginatedResponseData } from '@isaiahaiasi/voxelatlas-spec';
+import { Dto } from '@isaiahaiasi/voxelatlas-spec';
+import { Container, Typography } from '@mui/material';
 import Comment from '../Comment/Comment';
+import ErrorAlert from '../ErrorAlert';
 import Feed from '../Feed';
+import { CommentSkeleton, FeedSkeleton } from '../Skeletons';
 
 interface CommentFeedProps {
   roomId: string;
 }
 
 const operationId = 'getCommentsByRoomId';
+const commentCount = 3;
 
 const render = {
-  // eslint-disable-next-line arrow-body-style
-  success: (comment: PaginatedResponseData<typeof operationId>) => {
-    return <Comment key={comment.id} comment={comment} />;
-  },
-  error: () => <div>Something went wrong!</div>,
-  loading: () => <div>Loading...</div>,
+  error: () => <ErrorAlert />,
+  loading: () => <FeedSkeleton count={commentCount} skeleton={<CommentSkeleton />} />,
+  success: (comment: Dto['Comment']) => <Comment comment={comment} />,
 };
 
 export default function CommentFeed({ roomId }: CommentFeedProps) {
   const reqData = {
     params: { roomid: roomId },
-    query: { limit: '3' },
+    query: { limit: String(commentCount) },
   };
 
   return (
-    <div>
-      <h3>Comments</h3>
+    <Container maxWidth="sm">
+      <Typography variant="h3">Comments</Typography>
       <Feed reqData={reqData} operationId={operationId} render={render} />
-    </div>
+    </Container>
   );
 }

@@ -1,13 +1,16 @@
 import { Dto } from '@isaiahaiasi/voxelatlas-spec';
+import { Container } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { useFetch } from '../../hooks/useFetch';
 import CommentFeed from '../CommentFeed';
+import ErrorAlert from '../ErrorAlert';
 import Room from '../Room/Room';
+import { RoomSkeleton } from '../Skeletons';
 
 const render = {
   success: (room: Dto['Room']) => <Room room={room} />,
-  loading: () => <div>Loading...</div>,
-  error: () => <div>Something went wrong!</div>,
+  loading: () => <RoomSkeleton />,
+  error: () => <ErrorAlert />,
 };
 
 export default function RoomPage() {
@@ -22,13 +25,9 @@ export default function RoomPage() {
   const { data: roomData, status: roomStatus } = useFetch('getRoomById', reqData);
 
   return (
-    <div>
-      <div>
-        {render[roomStatus](roomData!)}
-      </div>
-      <div>
-        <CommentFeed roomId={roomid} />
-      </div>
-    </div>
+    <Container>
+      {render[roomStatus](roomData!)}
+      <CommentFeed roomId={roomid} />
+    </Container>
   );
 }
