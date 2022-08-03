@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import useLoadScript from '../../hooks/useLoadScript';
+import useLoadScript from './useLoadScript';
 
 interface UseGoogleLoginParams {
   onSuccess?: (res: any) => void;

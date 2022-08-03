@@ -1,9 +1,9 @@
 import { Dto } from '@isaiahaiasi/voxelatlas-spec';
 import { Container } from '@mui/material';
-import ErrorAlert from '../ErrorAlert';
-import Feed from '../Feed';
-import Room from '../Room';
-import { FeedSkeleton, RoomSkeleton } from '../Skeletons';
+import ErrorAlert from './ErrorAlert';
+import Feed from './Feed';
+import Room from './Room';
+import { FeedSkeleton, RoomSkeleton } from './Skeletons';
 
 const operationId = 'getRooms';
 const limit = 10;

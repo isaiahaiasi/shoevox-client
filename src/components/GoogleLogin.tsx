@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import { AuthContext } from '../AuthProvider';
-import useGoogleLogin from './useGoogleLogin';
+import { AuthContext } from './AuthProvider';
+import useGoogleLogin from '../hooks/useGoogleLogin';
 
 // TODO: This should probably be a custom hook wrapping React-Query
 async function putUser(idToken: string) {

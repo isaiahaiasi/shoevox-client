@@ -1,11 +1,11 @@
 import { Dto } from '@isaiahaiasi/voxelatlas-spec';
 import { Container } from '@mui/material';
 import { useParams } from 'react-router-dom';
-import { useFetch } from '../../hooks/useFetch';
-import CommentFeed from '../CommentFeed';
-import ErrorAlert from '../ErrorAlert';
-import Room from '../Room/Room';
-import { RoomSkeleton } from '../Skeletons';
+import { useFetch } from '../hooks/useFetch';
+import CommentFeed from './CommentFeed';
+import ErrorAlert from './ErrorAlert';
+import Room from './Room';
+import { RoomSkeleton } from './Skeletons';
 
 const render = {
   success: (room: Dto['Room']) => <Room room={room} />,

@@ -3,14 +3,14 @@ import { useContext } from 'react';
 import {
   BrowserRouter, Navigate, Route, Routes
 } from 'react-router-dom';
-import { AuthContext } from '../AuthProvider';
-import Dashboard from '../Dashboard';
-import GoogleLogin from '../GoogleLogin';
-import Nav from '../Nav';
-import NotFound from '../NotFound';
-import RoomPage from '../RoomPage';
-import UserFeed from '../UserFeed/UserFeed';
-import Welcome from '../Welcome';
+import { AuthContext } from './AuthProvider';
+import Dashboard from './Dashboard';
+import GoogleLogin from './GoogleLogin';
+import Nav from './Nav';
+import NotFound from './NotFound';
+import RoomPage from './RoomPage';
+import UserFeed from './UserFeed';
+import Welcome from './Welcome';
 
 const LoggedOutRoutes = () => (
   <Routes>

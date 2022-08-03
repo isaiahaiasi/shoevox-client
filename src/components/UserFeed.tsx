@@ -1,10 +1,10 @@
 import { Dto } from '@isaiahaiasi/voxelatlas-spec';
 import { Container } from '@mui/material';
 import { useParams } from 'react-router-dom';
-import ErrorAlert from '../ErrorAlert';
-import Feed from '../Feed';
-import Room from '../Room';
-import { FeedSkeleton, RoomSkeleton } from '../Skeletons';
+import ErrorAlert from './ErrorAlert';
+import Feed from './Feed';
+import Room from './Room';
+import { FeedSkeleton, RoomSkeleton } from './Skeletons';
 
 const operationId = 'getRoomsByUserId';
 const limit = 5;

@@ -1,9 +1,9 @@
 import { Dto } from '@isaiahaiasi/voxelatlas-spec';
 import { Container, Typography } from '@mui/material';
-import Comment from '../Comment/Comment';
-import ErrorAlert from '../ErrorAlert';
-import Feed from '../Feed';
-import { CommentSkeleton, FeedSkeleton } from '../Skeletons';
+import Comment from './Comment';
+import ErrorAlert from './ErrorAlert';
+import Feed from './Feed';
+import { CommentSkeleton, FeedSkeleton } from './Skeletons';
 
 interface CommentFeedProps {
   roomId: string;

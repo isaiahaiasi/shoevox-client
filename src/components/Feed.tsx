@@ -1,8 +1,8 @@
 import { PaginatedOperationId, zSchemas, PaginatedResponseData } from '@isaiahaiasi/voxelatlas-spec';
 import { Button } from '@mui/material';
 import { z } from 'zod';
-import { useInfiniteFetch } from '../../hooks/useFetch';
-import PaginatedData from '../PaginatedData';
+import { useInfiniteFetch } from '../hooks/useFetch';
+import PaginatedData from './PaginatedData';
 
 interface FeedProps<S extends PaginatedOperationId> {
   operationId: S;
