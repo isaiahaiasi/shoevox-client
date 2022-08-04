@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
-import Button from './primitives/Button';
-import Container from './primitives/Container';
+import { Button, Container } from './primitives';
 
 export default function Nav() {
   return (
@@ -8,6 +7,6 @@ export default function Nav() {
       <Button>
         <Link to="/dashboard">Dashboard</Link>
       </Button>
-    </Container >
+    </Container>
   );
 }

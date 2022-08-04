@@ -7,5 +7,5 @@ interface StackProps {
 export default function Stack({ children }: StackProps) {
   return (
     <div className={style.stack}>{children}</div>
-  )
+  );
 }

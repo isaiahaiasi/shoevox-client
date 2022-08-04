@@ -1,4 +1,4 @@
-import Typography from "./primitives/Typography";
+import Typography from './primitives/Typography';
 
 export default function Welcome() {
   return (

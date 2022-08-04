@@ -1,11 +1,12 @@
 import styles from './skeleton.module.scss';
 
 interface SkeletonProps {
-  variant: 'rectangular' | 'text' | 'circle';
+  variant: 'Rectangular' | 'Text' | 'Circle';
 }
 
 export default function Skeleton({ variant }: SkeletonProps) {
+  const variantStyle = `variant${variant}`;
   return (
-    <div className={styles.skeleton} />
-  )
+    <div className={`${styles.skeleton} ${styles[variantStyle]}`} />
+  );
 }

@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { AuthContext } from './AuthProvider';
 import useGoogleLogin from '../hooks/useGoogleLogin';
+import { Button } from './primitives';
 
 // TODO: This should probably be a custom hook wrapping React-Query
 async function putUser(idToken: string) {
@@ -45,12 +46,12 @@ export default function GoogleLogin() {
 
   // TODO: Proper button styling
   return (
-    <button
+    <Button
       type="button"
       onClick={() => loginFn()}
       disabled={!!user}
     >
       Login with google
-    </button>
+    </Button>
   );
 }

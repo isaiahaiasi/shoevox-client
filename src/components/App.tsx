@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import {
-  BrowserRouter, Navigate, Route, Routes
+  BrowserRouter, Navigate, Route, Routes,
 } from 'react-router-dom';
 import { AuthContext } from './AuthProvider';
 import Dashboard from './Dashboard';
@@ -11,27 +11,33 @@ import RoomPage from './RoomPage';
 import UserFeed from './UserFeed';
 import Welcome from './Welcome';
 
-const LoggedOutRoutes = () => (
-  <Routes>
-    <Route path="/" element={<Welcome />} />
-    <Route path="*" element={<Navigate to="/" />} />
-  </Routes>
-);
-
-const LoggedInRoutes = () => (
-  <>
-    <Nav />
+function LoggedOutRoutes() {
+  return (
     <Routes>
-      <Route path="/" element={<Navigate to="/dashboard" />} />,
-      <Route path="/dashboard" element={<Dashboard />} />,
-      <Route path="/r/:roomid" element={<RoomPage />} />,
-      <Route path="/u/:userid" element={<UserFeed />} />,
-      <Route path="*" element={<NotFound />} />,
+      <Route path="/" element={<Welcome />} />
+      <Route path="*" element={<Navigate to="/" />} />
     </Routes>
-  </>
-);
+  );
+}
 
-const FooterSpacer = () => <div style={{ height: 100 }} />;
+function LoggedInRoutes() {
+  return (
+    <>
+      <Nav />
+      <Routes>
+        <Route path="/" element={<Navigate to="/dashboard" />} />,
+        <Route path="/dashboard" element={<Dashboard />} />,
+        <Route path="/r/:roomid" element={<RoomPage />} />,
+        <Route path="/u/:userid" element={<UserFeed />} />,
+        <Route path="*" element={<NotFound />} />,
+      </Routes>
+    </>
+  );
+}
+
+function FooterSpacer() {
+  return <div style={{ height: 100 }} />;
+}
 
 function App() {
   const [user] = useContext(AuthContext);

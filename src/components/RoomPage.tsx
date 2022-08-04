@@ -7,7 +7,6 @@ import Container from './primitives/Container';
 import Room from './Room';
 import { RoomSkeleton } from './Skeletons';
 
-
 const render = {
   success: (room: Dto['Room']) => <Room room={room} />,
   loading: () => <RoomSkeleton />,

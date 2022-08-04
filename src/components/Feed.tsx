@@ -2,7 +2,7 @@ import { PaginatedOperationId, zSchemas, PaginatedResponseData } from '@isaiahai
 import { z } from 'zod';
 import { useInfiniteFetch } from '../hooks/useFetch';
 import PaginatedData from './PaginatedData';
-import Button from './primitives/Button';
+import { Button } from './primitives';
 
 interface FeedProps<S extends PaginatedOperationId> {
   operationId: S;
