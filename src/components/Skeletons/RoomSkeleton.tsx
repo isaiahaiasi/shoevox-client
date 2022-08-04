@@ -1,5 +1,5 @@
-import { Skeleton } from '@mui/material';
+import Skeleton from './Skeleton';
 
 export default function RoomSkeleton() {
-  return <Skeleton variant="rectangular" height={200} />;
+  return <Skeleton variant="rectangular" />;
 }

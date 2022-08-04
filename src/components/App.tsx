@@ -1,4 +1,3 @@
-import { Box } from '@mui/material';
 import { useContext } from 'react';
 import {
   BrowserRouter, Navigate, Route, Routes
@@ -32,7 +31,7 @@ const LoggedInRoutes = () => (
   </>
 );
 
-const FooterSpacer = () => <Box sx={{ height: 100 }} />;
+const FooterSpacer = () => <div style={{ height: 100 }} />;
 
 function App() {
   const [user] = useContext(AuthContext);

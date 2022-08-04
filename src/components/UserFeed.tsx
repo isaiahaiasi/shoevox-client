@@ -1,8 +1,8 @@
 import { Dto } from '@isaiahaiasi/voxelatlas-spec';
-import { Container } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import ErrorAlert from './ErrorAlert';
 import Feed from './Feed';
+import Container from './primitives/Container';
 import Room from './Room';
 import { FeedSkeleton, RoomSkeleton } from './Skeletons';
 
@@ -25,7 +25,7 @@ export default function UserFeed() {
   const reqData = { params: { userid }, query: { limit: String(limit) } };
 
   return (
-    <Container maxWidth="md">
+    <Container>
       <Feed reqData={reqData} operationId={operationId} render={render} />
     </Container>
   );

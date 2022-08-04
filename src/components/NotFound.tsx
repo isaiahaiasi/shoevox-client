@@ -1,11 +1,12 @@
-import { Container, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
+import Container from './primitives/Container';
+import Typography from './primitives/Typography';
 
 export default function NotFound() {
   return (
     <Container>
-      <Typography variant="h1">404 Not Found</Typography>
-      <Typography role="doc-subtitle">You lost there?</Typography>
+      <Typography.Header>404 Not Found</Typography.Header>
+      <Typography.Body>You lost there?</Typography.Body>
       <p>
         Click
         {' '}

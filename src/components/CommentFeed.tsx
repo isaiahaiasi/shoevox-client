@@ -1,8 +1,9 @@
 import { Dto } from '@isaiahaiasi/voxelatlas-spec';
-import { Container, Typography } from '@mui/material';
 import Comment from './Comment';
 import ErrorAlert from './ErrorAlert';
 import Feed from './Feed';
+import Container from './primitives/Container';
+import Typography from './primitives/Typography';
 import { CommentSkeleton, FeedSkeleton } from './Skeletons';
 
 interface CommentFeedProps {
@@ -25,8 +26,8 @@ export default function CommentFeed({ roomId }: CommentFeedProps) {
   };
 
   return (
-    <Container maxWidth="sm">
-      <Typography variant="h3">Comments</Typography>
+    <Container>
+      <Typography.Header level={3}>Comments</Typography.Header>
       <Feed reqData={reqData} operationId={operationId} render={render} />
     </Container>
   );

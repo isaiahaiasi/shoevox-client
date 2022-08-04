@@ -1,7 +1,7 @@
-import { Box, Typography } from '@mui/material';
 import {
   createContext, Dispatch, SetStateAction, useState,
 } from 'react';
+import Typography from './primitives/Typography';
 
 type Provider = 'google';
 
@@ -24,11 +24,11 @@ export default function AuthProvider({ children }: Props) {
 
   return (
     <AuthContext.Provider value={authState}>
-      <Box>
-        <Typography variant="caption">
+      <div>
+        <Typography.Caption>
           {authState[0] ? `Logged in as ${authState[0].username}.` : 'Not logged in.'}
-        </Typography>
-      </Box>
+        </Typography.Caption>
+      </div>
       {children}
     </AuthContext.Provider>
   );

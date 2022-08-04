@@ -1,7 +1,7 @@
 import { Dto } from '@isaiahaiasi/voxelatlas-spec';
-import { Container } from '@mui/material';
 import ErrorAlert from './ErrorAlert';
 import Feed from './Feed';
+import Container from './primitives/Container';
 import Room from './Room';
 import { FeedSkeleton, RoomSkeleton } from './Skeletons';
 
@@ -18,7 +18,7 @@ const reqData = { query: { limit: String(limit) } };
 
 export default function Dashboard() {
   return (
-    <Container maxWidth="md">
+    <Container>
       <Feed reqData={reqData} operationId={operationId} render={render} />
     </Container>
   );

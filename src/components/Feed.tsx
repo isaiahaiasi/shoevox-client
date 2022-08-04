@@ -1,8 +1,8 @@
 import { PaginatedOperationId, zSchemas, PaginatedResponseData } from '@isaiahaiasi/voxelatlas-spec';
-import { Button } from '@mui/material';
 import { z } from 'zod';
 import { useInfiniteFetch } from '../hooks/useFetch';
 import PaginatedData from './PaginatedData';
+import Button from './primitives/Button';
 
 interface FeedProps<S extends PaginatedOperationId> {
   operationId: S;
@@ -39,7 +39,6 @@ export default function Feed<S extends PaginatedOperationId>({
             renderFn={render.success}
           />
           <Button
-            variant="contained"
             disabled={!hasNextPage || isFetchingNextPage}
             onClick={() => fetchNextPage()}
           >

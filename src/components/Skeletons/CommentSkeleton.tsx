@@ -1,7 +1,7 @@
-import { Skeleton } from '@mui/material';
+import Skeleton from './Skeleton';
 
 export default function CommentSkeleton() {
   return (
-    <Skeleton variant="rectangular" height={32} />
+    <Skeleton variant="rectangular" />
   );
 }

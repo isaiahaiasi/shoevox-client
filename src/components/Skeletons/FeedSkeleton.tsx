@@ -1,5 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-import { Stack } from '@mui/material';
+import { Stack } from '../primitives';
 import { Fragment, ReactNode } from 'react';
 
 interface FeedSkeletonProps {

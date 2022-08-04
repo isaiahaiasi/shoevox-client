@@ -1,7 +1,7 @@
 import { PaginatedOperationId, PaginatedResponse, PaginatedResponseData } from '@isaiahaiasi/voxelatlas-spec';
 import React from 'react';
 import { InfiniteData } from '@tanstack/react-query';
-import { Box, Stack } from '@mui/material';
+import { Stack } from './primitives';
 
 interface PaginatedDataProps<S extends PaginatedOperationId> {
   pages: InfiniteData<PaginatedResponse<S>>['pages'],
@@ -18,9 +18,9 @@ export default function PaginatedData<S extends PaginatedOperationId>(
       .map(({ data }: PaginatedResponse<S>) => (
         <React.Fragment key={data[0].id}>
           {data.map((instanceData) => (
-            <Box key={instanceData.id}>
+            <div key={instanceData.id}>
               {renderFn(instanceData)}
-            </Box>
+            </div>
           ))}
         </React.Fragment>
       ))}
