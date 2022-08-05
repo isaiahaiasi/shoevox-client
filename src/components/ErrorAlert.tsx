@@ -1,4 +1,3 @@
-/* eslint-disable react/require-default-props */
 interface ErrorProps {
   title?: string;
   content?: string;

@@ -29,3 +29,6 @@ rules:
 
   # These rules are just annoying during development
   no-console: 0
+
+  # Might refactor to abide by these rules:
+  react/require-default-props: 0

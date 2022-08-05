@@ -47,7 +47,7 @@ export default function GoogleLogin() {
   // TODO: Proper button styling
   return (
     <Button
-      type="button"
+      variant="Outlined"
       onClick={() => loginFn()}
       disabled={!!user}
     >

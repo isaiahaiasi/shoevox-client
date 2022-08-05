@@ -1,4 +1,3 @@
-/* eslint-disable react/require-default-props */
 import styles from './typography.module.scss';
 
 interface ChildProp {
