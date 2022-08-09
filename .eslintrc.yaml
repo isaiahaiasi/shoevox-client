@@ -22,6 +22,8 @@ settings:
   packageManager: pnpm
 ignorePatterns:
   - vite.config.ts
+  - postcss.config.js
+  - tailwind.config.js
 rules:
   # These rules do more harm than good to JSX legibility, in my opinion.
   no-nested-ternary: 0

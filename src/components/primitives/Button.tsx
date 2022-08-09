@@ -1,5 +1,3 @@
-import styles from './button.module.scss';
-
 interface ButtonProps extends
   React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
   variant?: 'Contained' | 'Outlined';
@@ -8,8 +6,8 @@ interface ButtonProps extends
 export default function Button({ variant = 'Contained', className: outerClassName, ...props }: ButtonProps) {
   const className = [
     outerClassName ?? '',
-    styles.button,
-    styles[`variant${variant}`],
+    // styles.button,
+    // styles[`variant${variant}`],
   ].join(' ');
 
   return (
