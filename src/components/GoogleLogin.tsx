@@ -9,7 +9,7 @@ export default function GoogleLogin() {
   // TODO: "google button" styling
   return (
     <Button
-      variant="Outlined"
+      variant="contained"
       onClick={(e) => loginWithOauth(e, 'google')}
       disabled={!!user}
     >

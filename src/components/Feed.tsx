@@ -39,6 +39,7 @@ export default function Feed<S extends PaginatedOperationId>({
             renderFn={render.success}
           />
           <Button
+            variant="outlined"
             disabled={!hasNextPage || isFetchingNextPage}
             onClick={() => fetchNextPage()}
           >
