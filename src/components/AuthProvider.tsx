@@ -1,26 +1,33 @@
+import { Dto } from '@isaiahaiasi/voxelatlas-spec';
 import {
-  createContext, Dispatch, SetStateAction, useState,
+  createContext, Dispatch, SetStateAction, useEffect, useState,
 } from 'react';
+import { getCurrentUser } from '../utils/oauthUtils';
 import Typography from './primitives/Typography';
-
-type Provider = 'google';
-
-export interface User {
-  token: string;
-  username: string;
-  provider: Provider;
-}
 
 interface Props {
   children: React.ReactNode;
 }
 
-type ContextType = [User | null, Dispatch<SetStateAction<User | null>> | null];
+type ContextType = [Dto['User'] | null, Dispatch<SetStateAction<Dto['User'] | null>> | null];
 
 export const AuthContext = createContext<ContextType>([null, null]);
 
 export default function AuthProvider({ children }: Props) {
-  const authState = useState<User | null>(null);
+  // Avoiding destructuring so I'm not passing a "new" array as prop
+  const authState = useState<Dto['User'] | null>(null);
+
+  // TODO: probably want to replace with rq?
+  useEffect(() => {
+    (async () => {
+      const [currentUser, setCurrentUser] = authState;
+      if (currentUser) return;
+
+      const user = await getCurrentUser();
+
+      setCurrentUser(user);
+    })();
+  }, []);
 
   return (
     <AuthContext.Provider value={authState}>
