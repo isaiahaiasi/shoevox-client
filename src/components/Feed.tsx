@@ -38,13 +38,16 @@ export default function Feed<S extends PaginatedOperationId>({
             pages={data.pages}
             renderFn={render.success}
           />
-          <Button
-            variant="outlined"
-            disabled={!hasNextPage || isFetchingNextPage}
-            onClick={() => fetchNextPage()}
-          >
-            {isFetchingNextPage ? 'Loading...' : hasNextPage ? 'Load more' : 'No more!'}
-          </Button>
+          <div className="flex justify-center">
+            <Button
+              variant="outlined"
+              disabled={!hasNextPage || isFetchingNextPage}
+              onClick={() => fetchNextPage()}
+            >
+              {isFetchingNextPage ? 'Loading...' : hasNextPage ? 'Load more' : 'No more!'}
+            </Button>
+          </div>
+
         </>
       );
     default:

@@ -28,6 +28,7 @@ rules:
   # These rules do more harm than good to JSX legibility, in my opinion.
   no-nested-ternary: 0
   react/jsx-one-expression-per-line: 0
+  react/jsx-props-no-spreading: 0
 
   # These rules are just annoying during development
   no-console: 0

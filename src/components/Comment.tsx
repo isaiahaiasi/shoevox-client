@@ -1,6 +1,5 @@
 import { Dto } from '@isaiahaiasi/voxelatlas-spec';
-import { Link } from 'react-router-dom';
-import Typography from './primitives/Typography';
+import { Link, Typography } from './primitives';
 
 interface CommentProps {
   comment: Dto['Comment'];

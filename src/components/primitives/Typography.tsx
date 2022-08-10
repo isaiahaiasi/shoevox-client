@@ -8,7 +8,7 @@ interface HeaderProps extends ChildProp {
 
 export function Caption({ children }: ChildProp) {
   return (
-    <div className="text-sm font-light italic">{children}</div>
+    <div className="text-sm font-light italic text-neutral-600">{children}</div>
   );
 }
 

@@ -4,7 +4,6 @@ import {
 } from 'react-router-dom';
 import { AuthContext } from './AuthProvider';
 import Dashboard from './Dashboard';
-import LogoutButton from './LogoutButton';
 import Nav from './Nav';
 import NotFound from './NotFound';
 import RoomPage from './RoomPage';
@@ -24,7 +23,6 @@ function LoggedInRoutes() {
   return (
     <>
       <Nav />
-      <LogoutButton />
       <Routes>
         <Route path="/" element={<Navigate to="/dashboard" />} />,
         <Route path="/dashboard" element={<Dashboard />} />,

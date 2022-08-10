@@ -3,6 +3,7 @@ import {
   createContext, Dispatch, SetStateAction, useEffect, useState,
 } from 'react';
 import { getCurrentUser } from '../utils/oauthUtils';
+import { Container } from './primitives';
 import Typography from './primitives/Typography';
 
 interface Props {
@@ -21,21 +22,22 @@ export default function AuthProvider({ children }: Props) {
   useEffect(() => {
     (async () => {
       const [currentUser, setCurrentUser] = authState;
+
       if (currentUser) return;
 
       const user = await getCurrentUser();
 
       setCurrentUser(user);
     })();
-  }, []);
+  }, [authState]);
 
   return (
     <AuthContext.Provider value={authState}>
-      <div>
+      <Container>
         <Typography.Caption>
-          {authState[0] ? `Logged in as ${authState[0].username}.` : 'Not logged in.'}
+          <div className="text-center">{authState[0] ? `Logged in as ${authState[0].username}.` : 'Not logged in.'}</div>
         </Typography.Caption>
-      </div>
+      </Container>
       {children}
     </AuthContext.Provider>
   );

@@ -1,6 +1,4 @@
-import { Link } from 'react-router-dom';
-import Container from './primitives/Container';
-import Typography from './primitives/Typography';
+import { Link, Container, Typography } from './primitives';
 
 export default function NotFound() {
   return (

@@ -1,7 +1,5 @@
 import { Dto } from '@isaiahaiasi/voxelatlas-spec';
-import { Link } from 'react-router-dom';
-import Container from './primitives/Container';
-import Typography from './primitives/Typography';
+import { Container, Link, Typography } from './primitives';
 
 interface RoomProps {
   room: Dto['Room'];

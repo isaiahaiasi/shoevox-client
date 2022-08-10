@@ -4,6 +4,8 @@ interface ContainerProps {
 
 export default function Container({ children }: ContainerProps) {
   return (
-    <div>{children}</div>
+    <div className="container mx-auto columns-1">
+      {children}
+    </div>
   );
 }

@@ -1,12 +1,11 @@
-import { Link } from 'react-router-dom';
-import { Button, Container } from './primitives';
+import LogoutButton from './LogoutButton';
+import { Link } from './primitives';
 
 export default function Nav() {
   return (
-    <Container>
-      <Button>
-        <Link to="/dashboard">Dashboard</Link>
-      </Button>
-    </Container>
+    <div className="flex justify-end items-baseline gap-5 px-2">
+      <Link to="/dashboard">Dashboard</Link>
+      <LogoutButton />
+    </div>
   );
 }
