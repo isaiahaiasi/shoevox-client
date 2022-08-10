@@ -20,12 +20,12 @@ export async function loginWithOauth(e: React.UIEvent, provider: string) {
   window.open(getLoginUrl(provider), '_self');
 }
 
-export async function logoutWithOauth(e: UIEvent) {
+export async function logoutWithOauth(e: React.UIEvent) {
   e.preventDefault();
   window.open(LOGOUT_URL, '_self');
 }
 
 export async function getCurrentUser() {
-  const res = await fetch(CURRENT_USER_URL, baseFetchOptions).then((r) => r.json());
-  return zSchemas.resources.User.parse(res.user);
+  const { user } = await fetch(CURRENT_USER_URL, baseFetchOptions).then((r) => r.json());
+  return user ? zSchemas.resources.User.parse(user) : null;
 }

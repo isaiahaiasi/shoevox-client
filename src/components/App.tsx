@@ -4,7 +4,7 @@ import {
 } from 'react-router-dom';
 import { AuthContext } from './AuthProvider';
 import Dashboard from './Dashboard';
-import GoogleLogin from './GoogleLogin';
+import LogoutButton from './LogoutButton';
 import Nav from './Nav';
 import NotFound from './NotFound';
 import RoomPage from './RoomPage';
@@ -24,6 +24,7 @@ function LoggedInRoutes() {
   return (
     <>
       <Nav />
+      <LogoutButton />
       <Routes>
         <Route path="/" element={<Navigate to="/dashboard" />} />,
         <Route path="/dashboard" element={<Dashboard />} />,
@@ -45,7 +46,6 @@ function App() {
 
   return (
     <BrowserRouter>
-      <GoogleLogin />
       {isLoggedIn ? <LoggedInRoutes /> : <LoggedOutRoutes />}
       <FooterSpacer />
     </BrowserRouter>
