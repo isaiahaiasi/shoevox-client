@@ -1,9 +1,11 @@
-import { logoutWithOauth } from '../utils/oauthUtils';
+import useAuth from '../hooks/useAuth';
 import { Button } from './Primitives';
 
 export default function LogoutButton() {
+  const { logout } = useAuth();
+
   return (
-    <Button onClick={logoutWithOauth}>
+    <Button onClick={logout}>
       Logout
     </Button>
   );

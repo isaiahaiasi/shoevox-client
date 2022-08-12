@@ -12,7 +12,19 @@ type GenericRequestData = {
 
 const { responses, requests } = zSchemas;
 
-const DEFAULT_LIMIT = 5;
+export const BASE_FETCH_OPTIONS: RequestInit = {
+  credentials: 'include',
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Credentials': 'true',
+  },
+};
+
+export const DEFAULT_LIMIT = 5;
+
+export const CURRENT_USER_URL = `${import.meta.env.VITE_API_URL}/auth/current`;
+export const LOGOUT_URL = `${import.meta.env.VITE_API_URL}/auth/logout`;
 
 function interpolateParams(path: string, params?: Record<string, string>) {
   if (!params) return path;
@@ -34,6 +46,15 @@ function getQueryString(query?: Record<string, any>) {
 
   // avoid sending just '?' if given empty query object
   return queryString !== '?' ? queryString : '';
+}
+
+export function getLoginUrl(provider: string) {
+  return `${import.meta.env.VITE_API_URL}/auth/providers/${provider}`;
+}
+
+export async function getCurrentUser() {
+  const { user } = await fetch(CURRENT_USER_URL, BASE_FETCH_OPTIONS).then((r) => r.json());
+  return user ? zSchemas.resources.User.parse(user) : null;
 }
 
 export function getUrl<T extends OperationId>(

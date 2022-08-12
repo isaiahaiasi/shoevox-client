@@ -1,8 +1,7 @@
-import { useContext } from 'react';
 import {
   BrowserRouter, Navigate, Route, Routes,
 } from 'react-router-dom';
-import { AuthContext } from './AuthProvider';
+import useAuth from '../hooks/useAuth';
 import Dashboard from './Dashboard';
 import Nav from './Nav';
 import NotFound from './NotFound';
@@ -35,7 +34,7 @@ function LoggedInRoutes() {
 }
 
 function App() {
-  const [user] = useContext(AuthContext);
+  const { user } = useAuth();
   const isLoggedIn = !!user;
 
   return (

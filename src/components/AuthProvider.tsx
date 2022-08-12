@@ -1,40 +1,55 @@
 import { Dto } from '@isaiahaiasi/voxelatlas-spec';
 import {
-  createContext, Dispatch, SetStateAction, useEffect, useState,
+  createContext, useEffect, useMemo, useState,
 } from 'react';
-import { getCurrentUser } from '../utils/oauthUtils';
+import { getCurrentUser, getLoginUrl, LOGOUT_URL } from '../utils/fetchUtils';
 import { Container, Typography } from './Primitives';
 
 interface Props {
   children: React.ReactNode;
 }
 
-type ContextType = [Dto['User'] | null, Dispatch<SetStateAction<Dto['User'] | null>> | null];
+async function login(e: React.UIEvent, provider: string) {
+  e.preventDefault();
+  window.open(getLoginUrl(provider), '_self');
+}
 
-export const AuthContext = createContext<ContextType>([null, null]);
+async function logout(e: React.UIEvent) {
+  e.preventDefault();
+  window.open(LOGOUT_URL, '_self');
+}
+
+interface ContextType {
+  login: typeof login;
+  logout: typeof logout;
+  user: Dto['User'] | null;
+}
+
+export const AuthContext = createContext<ContextType>({
+  login,
+  logout,
+  user: null,
+});
 
 export default function AuthProvider({ children }: Props) {
-  // Avoiding destructuring so I'm not passing a "new" array as prop
-  const authState = useState<Dto['User'] | null>(null);
+  const [user, setUser] = useState<Dto['User'] | null>(null);
 
   // TODO: probably want to replace with rq?
   useEffect(() => {
-    (async () => {
-      const [currentUser, setCurrentUser] = authState;
+    if (user) return;
 
-      if (currentUser) return;
+    getCurrentUser().then(setUser);
+  }, [user, setUser]);
 
-      const user = await getCurrentUser();
-
-      setCurrentUser(user);
-    })();
-  }, [authState]);
+  const authData = useMemo(() => ({ user, logout, login }), [user]);
 
   return (
-    <AuthContext.Provider value={authState}>
+    <AuthContext.Provider value={authData}>
       <Container>
         <Typography.Caption>
-          <div className="text-center">{authState[0] ? `Logged in as ${authState[0].username}.` : 'Not logged in.'}</div>
+          <div className="text-center">
+            {user ? `Logged in as ${user.username}.` : 'Not logged in.'}
+          </div>
         </Typography.Caption>
       </Container>
       {children}
