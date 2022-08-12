@@ -7,16 +7,40 @@ interface RoomProps {
 }
 
 export default function Room({ room }: RoomProps) {
+  const randIndex = Math.floor(Math.random() * 6);
+  const randStep = Math.floor(Math.random() * 2) + 1;
+
+  const bgGradientFrom = [
+    'from-cyan-500',
+    'from-rose-500',
+    'from-fuchsia-500',
+    'from-indigo-500',
+    'from-sky-500',
+    'from-orange-500',
+  ][randIndex];
+
+  const bgGradientTo = [
+    'to-cyan-500',
+    'to-rose-500',
+    'to-fuchsia-500',
+    'to-indigo-500',
+    'to-sky-500',
+    'to-orange-500',
+  ][(randIndex + randStep) % 6];
+
   return (
-    <article className="text-center">
+    <article>
       <Container>
         <Typography.Header level={2}>
           <RoomLink room={room} />
         </Typography.Header>
+        <div className={`rounded-lg h-36 bg-gradient-to-r ${bgGradientFrom} ${bgGradientTo}`} />
         <Typography.Caption>
-          Created on {room.createdAt} by
-          {' '}
-          <UserLink user={room.creator} />
+          <div className="text-right">
+            Created on {room.createdAt} by
+            {' '}
+            <UserLink user={room.creator} />
+          </div>
         </Typography.Caption>
       </Container>
     </article>

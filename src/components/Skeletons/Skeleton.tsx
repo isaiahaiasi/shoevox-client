@@ -4,14 +4,32 @@ interface SkeletonProps {
   variant: SkeletonVariants;
 }
 
-const skeletonStyles: { [key in SkeletonVariants]: string } = {
-  rectangular: 'rounded-none h-8',
-  circle: 'rounded-full h-6',
-  text: 'h-4',
+type ContainerStyle = {
+  [key in SkeletonVariants]: {
+    outer: string;
+    inner: string;
+  }
+};
+
+const skeletonStyles: ContainerStyle = {
+  rectangular: {
+    outer: 'h-full',
+    inner: 'rounded-lg',
+  },
+  circle: {
+    outer: 'h-8 w-8',
+    inner: 'rounded-full',
+  },
+  text: {
+    outer: 'h-6 w-full',
+    inner: '',
+  },
 };
 
 export default function Skeleton({ variant }: SkeletonProps) {
   return (
-    <div className={`bg-gray-500 animate-pulse p-1 rounded ${skeletonStyles[variant]}`} />
+    <div className={`p-1 ${skeletonStyles[variant].outer}`}>
+      <div className={`bg-gray-500 animate-pulse h-full w-full rounded ${skeletonStyles[variant].inner}`} />
+    </div>
   );
 }
