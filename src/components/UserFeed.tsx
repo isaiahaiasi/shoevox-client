@@ -1,6 +1,7 @@
 import { Dto } from '@isaiahaiasi/voxelatlas-spec';
 import { useParams } from 'react-router-dom';
 import { useFetch } from '../hooks/useFetch';
+import { getTimestampText } from '../utils/dateUtils';
 import ErrorAlert from './ErrorAlert';
 import Feed from './Feed';
 import { Container, Typography } from './Primitives';
@@ -27,13 +28,15 @@ export default function UserFeed() {
 
   const reqData = { params: { userid }, query: { limit: String(LIMIT) } };
 
+  const timestamp = data?.createdAt ? getTimestampText(data.createdAt) : null;
+
   return (
     <Container>
       <Typography.Header level={1}>
         {data?.username ?? <Skeleton variant="text" />}
       </Typography.Header>
       <Typography.Caption>
-        Joined {data?.createdAt ?? '???'}
+        Joined {timestamp ?? '???'}
       </Typography.Caption>
       { /* spacer */}
       <div className="h-5" />

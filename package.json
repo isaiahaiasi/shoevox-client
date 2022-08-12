@@ -13,6 +13,7 @@
     "@isaiahaiasi/voxelatlas-spec": "^0.2.10",
     "@tanstack/react-query": "^4.0.10",
     "@tanstack/react-query-devtools": "^4.0.10",
+    "date-fns": "^2.29.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-is": "^18.2.0",

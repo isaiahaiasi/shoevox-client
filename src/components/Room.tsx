@@ -1,4 +1,6 @@
 import { Dto } from '@isaiahaiasi/voxelatlas-spec';
+import { getTimestampText } from '../utils/dateUtils';
+
 import { RoomLink, UserLink } from './Links';
 import { Container, Typography } from './Primitives';
 
@@ -28,6 +30,8 @@ export default function Room({ room }: RoomProps) {
     'to-orange-500',
   ][(randIndex + randStep) % 6];
 
+  const timestamp = getTimestampText(room.createdAt);
+
   return (
     <article>
       <Container>
@@ -37,7 +41,7 @@ export default function Room({ room }: RoomProps) {
         <div className={`rounded-lg h-36 bg-gradient-to-r ${bgGradientFrom} ${bgGradientTo}`} />
         <Typography.Caption>
           <div className="text-right">
-            Created on {room.createdAt} by
+            Created {timestamp} by
             {' '}
             <UserLink user={room.creator} />
           </div>

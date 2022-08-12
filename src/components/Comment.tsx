@@ -1,4 +1,5 @@
 import { Dto } from '@isaiahaiasi/voxelatlas-spec';
+import { getTimestampText } from '../utils/dateUtils';
 import { UserLink } from './Links';
 import { Typography } from './Primitives';
 
@@ -9,11 +10,13 @@ interface CommentProps {
 export default function Comment({ comment }: CommentProps) {
   const { content, user, createdAt } = comment;
 
+  const timestamp = getTimestampText(createdAt);
+
   return (
     <div>
       <Typography.Body>{content}</Typography.Body>
       <Typography.Caption>
-        posted by <UserLink user={user} /> on {createdAt}
+        Posted {timestamp} by <UserLink user={user} />
       </Typography.Caption>
     </div>
   );

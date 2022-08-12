@@ -1,7 +1,7 @@
 import { Dto } from '@isaiahaiasi/voxelatlas-spec';
 import ErrorAlert from './ErrorAlert';
 import Feed from './Feed';
-import { Container } from './Primitives';
+import { Container, Typography } from './Primitives';
 import Room from './Room';
 import { FeedSkeleton, RoomSkeleton } from './Skeletons';
 
@@ -19,6 +19,7 @@ const reqData = { query: { limit: String(limit) } };
 export default function Dashboard() {
   return (
     <Container>
+      <Typography.Header level={1}>Your Dashboard</Typography.Header>
       <Feed reqData={reqData} operationId={operationId} render={render} />
     </Container>
   );
