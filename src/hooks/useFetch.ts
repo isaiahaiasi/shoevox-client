@@ -1,26 +1,15 @@
-import { OperationId, PaginatedOperationId, zSchemas } from '@isaiahaiasi/voxelatlas-spec';
+import {
+  OperationId, PaginatedOperationId, zSchemas,
+} from '@isaiahaiasi/voxelatlas-spec';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
-import { useContext } from 'react';
 import { z } from 'zod';
-import { AuthContext, User } from '../components/AuthProvider';
 import { getInfiniteFetch, getFetch, getUrl } from '../utils/fetchUtils';
 
-interface AuthHeaders {
-  authorization: `Bearer ${string}`;
-  'X-Oauth-Provider': string;
-}
-
-function getRequestOptions(user: User | null): RequestInit {
-  const authHeaders: AuthHeaders | {} = user ? {
-    authorization: `Bearer ${user.token}`,
-    'X-OAuth-Provider': user.provider,
-  } : {};
-
+function getRequestOptions(): RequestInit {
   return {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      ...authHeaders,
     },
   };
 }
@@ -29,9 +18,7 @@ export function useInfiniteFetch<T extends PaginatedOperationId>(
   operationId: T,
   reqData: z.infer<typeof zSchemas.requests[T]>,
 ) {
-  const [user] = useContext(AuthContext);
-
-  const reqOptions = getRequestOptions(user);
+  const reqOptions = getRequestOptions();
 
   const queryFn = getInfiniteFetch(operationId, reqData, reqOptions);
 
@@ -48,9 +35,7 @@ export function useFetch<T extends OperationId>(
   operationId: T,
   reqData: z.infer<typeof zSchemas.requests[T]>,
 ) {
-  const [user] = useContext(AuthContext);
-
-  const reqOptions = getRequestOptions(user);
+  const reqOptions = getRequestOptions();
 
   const queryFn = getFetch(operationId, reqData, reqOptions);
 
