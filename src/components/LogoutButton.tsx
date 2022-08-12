@@ -1,5 +1,5 @@
 import { logoutWithOauth } from '../utils/oauthUtils';
-import { Button } from './primitives';
+import { Button } from './Primitives';
 
 export default function LogoutButton() {
   return (

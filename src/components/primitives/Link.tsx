@@ -2,7 +2,7 @@ import { Link as RouterLink, LinkProps as RouterLinkProps } from 'react-router-d
 
 interface LinkProps extends RouterLinkProps { }
 
-const defaultLinkStyle = 'underline text-blue-600 hover:text-blue-800 visited:text-black';
+const defaultLinkStyle = 'underline text-blue-600 hover:text-blue-800 text-inherit';
 
 export default function Link({ ...props }: LinkProps) {
   return (

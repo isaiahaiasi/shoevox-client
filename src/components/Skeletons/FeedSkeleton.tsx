@@ -1,6 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import { Fragment, ReactNode } from 'react';
-import { Stack } from '../primitives';
+import { Stack } from '../Primitives';
 
 interface FeedSkeletonProps {
   count: number;

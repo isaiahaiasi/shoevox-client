@@ -3,8 +3,7 @@ import {
   createContext, Dispatch, SetStateAction, useEffect, useState,
 } from 'react';
 import { getCurrentUser } from '../utils/oauthUtils';
-import { Container } from './primitives';
-import Typography from './primitives/Typography';
+import { Container, Typography } from './Primitives';
 
 interface Props {
   children: React.ReactNode;

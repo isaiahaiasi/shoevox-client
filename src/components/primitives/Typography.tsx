@@ -8,7 +8,7 @@ interface HeaderProps extends ChildProp {
 
 export function Caption({ children }: ChildProp) {
   return (
-    <div className="text-sm font-light italic text-neutral-600">{children}</div>
+    <div className="text-sm font-light italic text-neutral-500">{children}</div>
   );
 }
 
@@ -21,10 +21,10 @@ export function Body({ children }: ChildProp) {
 export function Header({ children, level }: HeaderProps) {
   switch (level) {
     case 2: return <h2 className="text-2xl font-bold">{children}</h2>;
-    case 3: return <h3 className="text-xl">{children}</h3>;
-    case 4: return <h4 className="text-lg">{children}</h4>;
-    case 5: return <h5 className="text-base">{children}</h5>;
-    case 6: return <h6 className="text-sm">{children}</h6>;
+    case 3: return <h3 className="text-xl font-bold">{children}</h3>;
+    case 4: return <h4 className="text-lg font-bold">{children}</h4>;
+    case 5: return <h5 className="text-base font-bold">{children}</h5>;
+    case 6: return <h6 className="text-sm font-bold">{children}</h6>;
     case 1:
     default: return <h1 className="text-3xl font-bold">{children}</h1>;
   }

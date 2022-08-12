@@ -34,10 +34,6 @@ function LoggedInRoutes() {
   );
 }
 
-function FooterSpacer() {
-  return <div style={{ height: 100 }} />;
-}
-
 function App() {
   const [user] = useContext(AuthContext);
   const isLoggedIn = !!user;
@@ -45,7 +41,6 @@ function App() {
   return (
     <BrowserRouter>
       {isLoggedIn ? <LoggedInRoutes /> : <LoggedOutRoutes />}
-      <FooterSpacer />
     </BrowserRouter>
   );
 }

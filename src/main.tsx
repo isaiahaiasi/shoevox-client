@@ -10,11 +10,13 @@ const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <App />
-      </AuthProvider>
-      <ReactQueryDevtools />
-    </QueryClientProvider>
+    <div className="bg-black text-white h-full overflow-auto flex flex-col">
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <App />
+        </AuthProvider>
+        <ReactQueryDevtools />
+      </QueryClientProvider>
+    </div>
   </React.StrictMode>,
 );

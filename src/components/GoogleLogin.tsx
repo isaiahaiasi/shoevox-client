@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { loginWithOauth } from '../utils/oauthUtils';
 import { AuthContext } from './AuthProvider';
-import { Button } from './primitives';
+import { Button } from './Primitives';
 
 export default function GoogleLogin() {
   const [user] = useContext(AuthContext);
@@ -13,7 +13,7 @@ export default function GoogleLogin() {
       onClick={(e) => loginWithOauth(e, 'google')}
       disabled={!!user}
     >
-      Login with google
+      Login with Google
     </Button>
   );
 }

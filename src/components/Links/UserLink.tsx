@@ -1,5 +1,5 @@
 import { Dto } from '@isaiahaiasi/voxelatlas-spec';
-import { Link } from '../primitives';
+import { Link } from '../Primitives';
 
 interface UserLinkProps {
   user: Dto['User'];

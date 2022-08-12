@@ -1,5 +1,5 @@
 import LogoutButton from './LogoutButton';
-import { Link } from './primitives';
+import { Link } from './Primitives';
 
 export default function Nav() {
   return (

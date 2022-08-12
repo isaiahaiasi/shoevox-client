@@ -1,4 +1,4 @@
-import { Link, Container, Typography } from './primitives';
+import { Link, Container, Typography } from './Primitives';
 
 export default function NotFound() {
   return (

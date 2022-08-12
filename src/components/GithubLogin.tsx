@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { loginWithOauth } from '../utils/oauthUtils';
 import { AuthContext } from './AuthProvider';
-import { Button } from './primitives';
+import { Button } from './Primitives';
 
 export default function GitHubLogin() {
   const [user] = useContext(AuthContext);

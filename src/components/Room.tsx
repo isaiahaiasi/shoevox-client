@@ -1,6 +1,6 @@
 import { Dto } from '@isaiahaiasi/voxelatlas-spec';
 import { RoomLink, UserLink } from './Links';
-import { Container, Typography } from './primitives';
+import { Container, Typography } from './Primitives';
 
 interface RoomProps {
   room: Dto['Room'];
@@ -8,7 +8,7 @@ interface RoomProps {
 
 export default function Room({ room }: RoomProps) {
   return (
-    <article>
+    <article className="text-center">
       <Container>
         <Typography.Header level={2}>
           <RoomLink room={room} />

@@ -3,18 +3,16 @@ import { useParams } from 'react-router-dom';
 import { useFetch } from '../hooks/useFetch';
 import ErrorAlert from './ErrorAlert';
 import Feed from './Feed';
-import { Typography } from './primitives';
-import Container from './primitives/Container';
+import { Container, Typography } from './Primitives';
 import Room from './Room';
 import { FeedSkeleton, RoomSkeleton } from './Skeletons';
 import Skeleton from './Skeletons/Skeleton';
 
-const operationId = 'getRoomsByUserId';
-const limit = 5;
+const LIMIT = 5;
 
 const render = {
   error: () => <ErrorAlert />,
-  loading: () => <FeedSkeleton count={limit} skeleton={<RoomSkeleton />} />,
+  loading: () => <FeedSkeleton count={LIMIT} skeleton={<RoomSkeleton />} />,
   success: (room: Dto['Room']) => <Room room={room} />,
 };
 
@@ -27,7 +25,7 @@ export default function UserFeed() {
 
   const { data } = useFetch('getUserById', { params: { userid } });
 
-  const reqData = { params: { userid }, query: { limit: String(limit) } };
+  const reqData = { params: { userid }, query: { limit: String(LIMIT) } };
 
   return (
     <Container>
@@ -37,7 +35,9 @@ export default function UserFeed() {
       <Typography.Caption>
         Joined {data?.createdAt ?? '???'}
       </Typography.Caption>
-      <Feed reqData={reqData} operationId={operationId} render={render} />
+      { /* spacer */}
+      <div className="h-5" />
+      <Feed reqData={reqData} operationId="getRoomsByUserId" render={render} />
     </Container>
   );
 }

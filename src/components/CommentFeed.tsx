@@ -2,7 +2,7 @@ import { Dto } from '@isaiahaiasi/voxelatlas-spec';
 import Comment from './Comment';
 import ErrorAlert from './ErrorAlert';
 import Feed from './Feed';
-import { Container, Typography } from './primitives';
+import { Container, Typography } from './Primitives';
 import { CommentSkeleton, FeedSkeleton } from './Skeletons';
 
 interface CommentFeedProps {

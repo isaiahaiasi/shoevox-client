@@ -1,6 +1,6 @@
 import { Dto } from '@isaiahaiasi/voxelatlas-spec';
 import { UserLink } from './Links';
-import { Typography } from './primitives';
+import { Typography } from './Primitives';
 
 interface CommentProps {
   comment: Dto['Comment'];

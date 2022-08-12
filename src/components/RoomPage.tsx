@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useFetch } from '../hooks/useFetch';
 import CommentFeed from './CommentFeed';
 import ErrorAlert from './ErrorAlert';
-import Container from './primitives/Container';
+import { Container } from './Primitives';
 import Room from './Room';
 import { RoomSkeleton } from './Skeletons';
 
