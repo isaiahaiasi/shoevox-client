@@ -1,46 +1,25 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import {
-  BrowserRouter, Navigate, Route, Routes,
+  BrowserRouter,
 } from 'react-router-dom';
-import useAuth from '../hooks/useAuth';
-import Dashboard from './Dashboard';
-import Nav from './Nav';
-import NotFound from './NotFound';
-import RoomPage from './RoomPage';
-import UserFeed from './UserFeed';
-import Welcome from './Welcome';
+import AuthProvider from './AuthProvider';
+import RouteSwitch from './RouteSwitch';
 
-function LoggedOutRoutes() {
-  return (
-    <Routes>
-      <Route path="/" element={<Welcome />} />
-      <Route path="*" element={<Navigate to="/" />} />
-    </Routes>
-  );
-}
-
-function LoggedInRoutes() {
-  return (
-    <>
-      <Nav />
-      <Routes>
-        <Route path="/" element={<Navigate to="/dashboard" />} />,
-        <Route path="/dashboard" element={<Dashboard />} />,
-        <Route path="/r/:roomid" element={<RoomPage />} />,
-        <Route path="/u/:userid" element={<UserFeed />} />,
-        <Route path="*" element={<NotFound />} />,
-      </Routes>
-    </>
-  );
-}
+const queryClient = new QueryClient();
 
 function App() {
-  const { user } = useAuth();
-  const isLoggedIn = !!user;
-
   return (
-    <BrowserRouter>
-      {isLoggedIn ? <LoggedInRoutes /> : <LoggedOutRoutes />}
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <div className="bg-black text-white h-full overflow-auto flex flex-col">
+          <AuthProvider>
+            <RouteSwitch />
+          </AuthProvider>
+        </div>
+      </BrowserRouter>
+      <ReactQueryDevtools />
+    </QueryClientProvider>
   );
 }
 

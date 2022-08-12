@@ -34,11 +34,10 @@ export const AuthContext = createContext<ContextType>({
 export default function AuthProvider({ children }: Props) {
   const [user, setUser] = useState<Dto['User'] | null>(null);
 
-  // TODO: probably want to replace with rq?
   useEffect(() => {
-    if (user) return;
-
-    getCurrentUser().then(setUser);
+    if (!user) {
+      getCurrentUser().then(setUser);
+    }
   }, [user, setUser]);
 
   const authData = useMemo(() => ({ user, logout, login }), [user]);
