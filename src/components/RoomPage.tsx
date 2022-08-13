@@ -1,6 +1,6 @@
 import { Dto } from '@isaiahaiasi/voxelatlas-spec';
 import { useParams } from 'react-router-dom';
-import { useFetch } from '../hooks/useFetch';
+import { useQueryOperation } from '../hooks/useFetch';
 import CommentFeed from './CommentFeed';
 import ErrorAlert from './ErrorAlert';
 import { Container } from './Primitives';
@@ -22,7 +22,7 @@ export default function RoomPage() {
 
   const reqData = { params: { roomid } };
 
-  const { data: roomData, status: roomStatus } = useFetch('getRoomById', reqData);
+  const { data: roomData, status: roomStatus } = useQueryOperation('getRoomById', reqData);
 
   return (
     <Container>

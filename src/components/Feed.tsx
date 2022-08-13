@@ -1,6 +1,6 @@
 import { PaginatedOperationId, zSchemas, PaginatedResponseData } from '@isaiahaiasi/voxelatlas-spec';
 import { z } from 'zod';
-import { useInfiniteFetch } from '../hooks/useFetch';
+import { useInfiniteQueryOperation } from '../hooks/useFetch';
 import PaginatedData from './PaginatedData';
 import { Button } from './Primitives';
 
@@ -25,7 +25,7 @@ export default function Feed<S extends PaginatedOperationId>({
     hasNextPage,
     isFetchingNextPage,
     status,
-  } = useInfiniteFetch(operationId, reqData);
+  } = useInfiniteQueryOperation(operationId, reqData);
 
   switch (status) {
     case 'error':

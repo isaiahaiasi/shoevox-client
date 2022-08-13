@@ -1,6 +1,6 @@
 import { Dto } from '@isaiahaiasi/voxelatlas-spec';
 import { useParams } from 'react-router-dom';
-import { useFetch } from '../hooks/useFetch';
+import { useQueryOperation } from '../hooks/useFetch';
 import { getTimestampText } from '../utils/dateUtils';
 import ErrorAlert from './ErrorAlert';
 import Feed from './Feed';
@@ -24,7 +24,7 @@ export default function UserFeed() {
     throw new Error('Could not find userid in url path, which is required for UserFeed component!');
   }
 
-  const { data } = useFetch('getUserById', { params: { userid } });
+  const { data } = useQueryOperation('getUserById', { params: { userid } });
 
   const reqData = { params: { userid }, query: { limit: String(LIMIT) } };
 
