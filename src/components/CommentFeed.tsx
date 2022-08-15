@@ -22,6 +22,7 @@ export default function CommentFeed({ roomId }: CommentFeedProps) {
   const reqData = {
     params: { roomid: roomId },
     query: { limit: String(commentCount) },
+    body: {},
   };
 
   return (

@@ -24,9 +24,13 @@ export default function UserFeed() {
     throw new Error('Could not find userid in url path, which is required for UserFeed component!');
   }
 
-  const { data } = useQueryOperation('getUserById', { params: { userid } });
+  const requestData = {
+    params: { userid },
+    query: { limit: String(LIMIT) },
+    body: {},
+  };
 
-  const reqData = { params: { userid }, query: { limit: String(LIMIT) } };
+  const { data } = useQueryOperation('getUserById', requestData);
 
   const timestamp = data?.createdAt ? getTimestampText(data.createdAt) : null;
 
@@ -40,7 +44,7 @@ export default function UserFeed() {
       </Typography.Caption>
       { /* spacer */}
       <div className="h-5" />
-      <Feed reqData={reqData} operationId="getRoomsByUserId" render={render} />
+      <Feed reqData={requestData} operationId="getRoomsByUserId" render={render} />
     </Container>
   );
 }

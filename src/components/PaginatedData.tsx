@@ -1,4 +1,5 @@
-import { PaginatedOperationId, PaginatedResponse, PaginatedResponseData } from '@isaiahaiasi/voxelatlas-spec';
+import { PaginatedResponse, PaginatedResponseData } from '@isaiahaiasi/voxelatlas-spec/public/types';
+import { PaginatedOperationId } from '@isaiahaiasi/voxelatlas-spec/public/paginatedOperationId';
 import React from 'react';
 import { InfiniteData } from '@tanstack/react-query';
 import { Stack } from './Primitives';

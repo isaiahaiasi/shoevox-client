@@ -1,12 +1,12 @@
-import { PaginatedOperationId, zSchemas, PaginatedResponseData } from '@isaiahaiasi/voxelatlas-spec';
-import { z } from 'zod';
+import { PaginatedOperationId } from '@isaiahaiasi/voxelatlas-spec/public/paginatedOperationId';
+import { ApiRequest, PaginatedResponseData } from '@isaiahaiasi/voxelatlas-spec/public/types';
 import { useInfiniteQueryOperation } from '../hooks/useFetch';
 import PaginatedData from './PaginatedData';
 import { Button } from './Primitives';
 
 interface FeedProps<S extends PaginatedOperationId> {
   operationId: S;
-  reqData: z.infer<typeof zSchemas.requests[S]>;
+  reqData: ApiRequest<S>;
   render: {
     error: () => React.ReactNode;
     loading: () => React.ReactNode;

@@ -1,16 +1,14 @@
-import {
-  OperationId, operations, zSchemas,
-} from '@isaiahaiasi/voxelatlas-spec';
+import { operations, zSchemas, OperationId } from '@isaiahaiasi/voxelatlas-spec';
+import { ApiRequest, ApiResponse } from '@isaiahaiasi/voxelatlas-spec/public/types';
 import { QueryFunction } from '@tanstack/react-query';
-import { z } from 'zod';
+
+const { responses } = zSchemas;
 
 type GenericRequestData = {
   params?: Record<string, any>;
   query?: Record<string, any>;
   body?: Record<string, any>;
 };
-
-const { responses, requests } = zSchemas;
 
 export const BASE_FETCH_OPTIONS: RequestInit = {
   credentials: 'include',
@@ -70,7 +68,7 @@ export function getUrl<T extends OperationId>(
 
 export function getFetch<OpId extends OperationId>(
   operationId: OpId,
-  reqData: z.infer<typeof requests[OpId]>,
+  reqData: ApiRequest<OpId>,
   requestInit?: RequestInit,
 ) {
   // I immediately cast because I can't use the *intersection* of the generic type.
@@ -81,25 +79,22 @@ export function getFetch<OpId extends OperationId>(
 
   const url = getUrl(operationId, { query, params });
 
-  type QueryData = z.infer<typeof responses[OpId]>;
-
-  const queryFn = (): Promise<QueryData> => fetch(url, requestInit)
+  const queryFn = (): Promise<ApiResponse<OpId>> => fetch(url, requestInit)
     .then((res) => res.json())
-    .then((res) => responses[operationId].parse(res));
+    .then((r) => { console.log('res', r); return r; });
+  // .then((res) => responses[operationId].parse(res));
 
   return queryFn;
 }
 
 export function getInfiniteFetch<OpId extends OperationId>(
   operationId: OpId,
-  reqData: z.infer<typeof requests[OpId]>,
+  reqData: ApiRequest<OpId>,
   requestInit?: RequestInit,
 ) {
   const { query, params } = reqData as GenericRequestData;
 
-  type QueryResponseData = z.infer<typeof responses[OpId]>;
-
-  const queryFn: QueryFunction<QueryResponseData> = async ({ pageParam }) => {
+  const queryFn: QueryFunction<ApiResponse<OpId>> = async ({ pageParam }) => {
     const cursor = pageParam;
     const paginatedQueryParams = {
       limit: DEFAULT_LIMIT,

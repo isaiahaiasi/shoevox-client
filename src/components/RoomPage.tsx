@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useQueryOperation } from '../hooks/useFetch';
 import CommentFeed from './CommentFeed';
 import ErrorAlert from './ErrorAlert';
+import CommentForm from './Form/CommentForm';
 import { Container } from './Primitives';
 import Room from './Room';
 import { RoomSkeleton } from './Skeletons';
@@ -20,13 +21,18 @@ export default function RoomPage() {
     throw new Error('Invalid path. Could not get param "roomid", which is required for RoomPage.');
   }
 
-  const reqData = { params: { roomid } };
+  const reqData = {
+    params: { roomid },
+    query: {},
+    body: {},
+  };
 
   const { data: roomData, status: roomStatus } = useQueryOperation('getRoomById', reqData);
 
   return (
     <Container>
       {render[roomStatus](roomData!)}
+      <CommentForm roomId={roomid} />
       <CommentFeed roomId={roomid} />
     </Container>
   );

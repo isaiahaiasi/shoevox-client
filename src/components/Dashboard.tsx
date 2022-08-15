@@ -14,7 +14,11 @@ const render = {
   success: (room: Dto['Room']) => <Room room={room} />,
 };
 
-const reqData = { query: { limit: String(limit) } };
+const reqData = {
+  query: { limit: String(limit) },
+  body: {},
+  params: {},
+};
 
 export default function Dashboard() {
   return (

@@ -1,12 +1,17 @@
+import { operations } from '@isaiahaiasi/voxelatlas-spec';
+import { PaginatedOperationId } from '@isaiahaiasi/voxelatlas-spec/public/paginatedOperationId';
 import {
-  OperationId, PaginatedOperationId, zSchemas,
-} from '@isaiahaiasi/voxelatlas-spec';
+  ApiRequest, ApiResponse, MutableOperationId, OperationId, ReadonlyOperationId,
+} from '@isaiahaiasi/voxelatlas-spec/public/types';
 import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
-import { z } from 'zod';
-import { getInfiniteFetch, getFetch, getUrl } from '../utils/fetchUtils';
+import {
+  getFetch, getInfiniteFetch, getUrl,
+} from '../utils/fetchUtils';
 
-function getRequestOptions(): RequestInit {
+function getRequestOptions(operationId?: OperationId): RequestInit {
   return {
+    credentials: 'include',
+    method: operationId ? operations[operationId].method : 'get',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -16,7 +21,7 @@ function getRequestOptions(): RequestInit {
 
 export function useInfiniteQueryOperation<T extends PaginatedOperationId>(
   operationId: T,
-  reqData: z.infer<typeof zSchemas.requests[T]>,
+  reqData: ApiRequest<T>,
 ) {
   const reqOptions = getRequestOptions();
 
@@ -31,9 +36,9 @@ export function useInfiniteQueryOperation<T extends PaginatedOperationId>(
   );
 }
 
-export function useQueryOperation<T extends OperationId>(
+export function useQueryOperation<T extends ReadonlyOperationId>(
   operationId: T,
-  reqData: z.infer<typeof zSchemas.requests[T]>,
+  reqData: ApiRequest<T>,
 ) {
   const reqOptions = getRequestOptions();
 
@@ -44,18 +49,16 @@ export function useQueryOperation<T extends OperationId>(
   return useQuery([urlQueryKey], queryFn);
 }
 
-export function useMutationOperation<T extends OperationId>(
+export function useMutationOperation<T extends MutableOperationId>(
   operationId: T,
 ) {
-  const reqOptions = getRequestOptions();
+  const reqOptions = getRequestOptions(operationId);
 
-  type ZResponse = z.infer<typeof zSchemas.responses[T]>;
-  type ZRequest = z.infer<typeof zSchemas.requests[T]>;
+  const mutateFn = (reqData: ApiRequest<T>): Promise<ApiResponse<T>> => {
+    reqOptions.body = JSON.stringify(reqData.body);
+    const mutationFn = getFetch(operationId, reqData, reqOptions);
+    return mutationFn();
+  };
 
-  return useMutation(
-    (reqData: ZRequest): Promise<ZResponse> => {
-      const mutationFn = getFetch(operationId, reqData, reqOptions);
-      return mutationFn();
-    },
-  );
+  return useMutation(mutateFn);
 }
