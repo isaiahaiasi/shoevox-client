@@ -1,14 +1,16 @@
-import { FormEventHandler, useState } from 'react';
-import { useMutationOperation } from '../../hooks/useFetch';
-import { Button } from '../Primitives';
+import { FormEventHandler } from 'react';
+import { getQueryKey, useMutationOperation } from '../../hooks/useFetch';
+import { Button, Input } from '../Primitives';
 
 interface CommentFormProps {
   roomId: string;
 }
 
 export default function CommentForm({ roomId }: CommentFormProps) {
-  const { mutate } = useMutationOperation('createComment');
-  const [content, setContent] = useState('');
+  const { mutate } = useMutationOperation(
+    'createComment',
+    [getQueryKey('getCommentsByRoomId', { params: { roomid: roomId } })],
+  );
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
@@ -19,17 +21,17 @@ export default function CommentForm({ roomId }: CommentFormProps) {
       query: {},
     };
 
+    e.currentTarget.content.value = '';
+
     return mutate(reqData);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
+    <form onSubmit={handleSubmit} className="flex p-4 gap-2">
+      <Input.Text
         name="content"
         id="content"
-        value={content}
-        onChange={(e) => setContent(e.currentTarget.value)}
-        className="text-black"
+        className="flex-1"
       />
       <Button type="submit">Submit</Button>
     </form>

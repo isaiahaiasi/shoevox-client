@@ -81,8 +81,12 @@ export function getFetch<OpId extends OperationId>(
 
   const queryFn = (): Promise<ApiResponse<OpId>> => fetch(url, requestInit)
     .then((res) => res.json())
-    .then((r) => { console.log('res', r); return r; });
-  // .then((res) => responses[operationId].parse(res));
+    .then((res) => {
+      console.log('res', res);
+      console.log('expected shape', responses[operationId].shape);
+      return res;
+    })
+    .then((res) => responses[operationId].parse(res));
 
   return queryFn;
 }

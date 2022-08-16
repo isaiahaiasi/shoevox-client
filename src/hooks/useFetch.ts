@@ -3,9 +3,11 @@ import { PaginatedOperationId } from '@isaiahaiasi/voxelatlas-spec/public/pagina
 import {
   ApiRequest, ApiResponse, MutableOperationId, OperationId, ReadonlyOperationId,
 } from '@isaiahaiasi/voxelatlas-spec/public/types';
-import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
 import {
-  getFetch, getInfiniteFetch, getUrl,
+  useInfiniteQuery, useMutation, useQuery, useQueryClient,
+} from '@tanstack/react-query';
+import {
+  getFetch, getInfiniteFetch,
 } from '../utils/fetchUtils';
 
 function getRequestOptions(operationId?: OperationId): RequestInit {
@@ -19,19 +21,28 @@ function getRequestOptions(operationId?: OperationId): RequestInit {
   };
 }
 
+export function getQueryKey(
+  operationId: OperationId,
+  { params }: Record<string, any>,
+): any[] {
+  const queryKey = [operationId];
+
+  if (params && Object.keys(params).length > 0) {
+    queryKey.push(params);
+  }
+
+  return queryKey;
+}
+
 export function useInfiniteQueryOperation<T extends PaginatedOperationId>(
   operationId: T,
   reqData: ApiRequest<T>,
 ) {
   const reqOptions = getRequestOptions();
 
-  const queryFn = getInfiniteFetch(operationId, reqData, reqOptions);
-
-  const initialUrlQueryKey = getUrl(operationId, reqData);
-
   return useInfiniteQuery(
-    [initialUrlQueryKey],
-    queryFn,
+    getQueryKey(operationId, reqData),
+    getInfiniteFetch(operationId, reqData, reqOptions),
     { getNextPageParam: (lastPage) => lastPage.links.next?.cursor },
   );
 }
@@ -42,16 +53,18 @@ export function useQueryOperation<T extends ReadonlyOperationId>(
 ) {
   const reqOptions = getRequestOptions();
 
-  const queryFn = getFetch(operationId, reqData, reqOptions);
-
-  const urlQueryKey = getUrl(operationId, reqData);
-
-  return useQuery([urlQueryKey], queryFn);
+  return useQuery(
+    getQueryKey(operationId, reqData),
+    getFetch(operationId, reqData, reqOptions),
+  );
 }
 
 export function useMutationOperation<T extends MutableOperationId>(
   operationId: T,
+  dependentQueries: any[] = [],
 ) {
+  const queryClient = useQueryClient();
+
   const reqOptions = getRequestOptions(operationId);
 
   const mutateFn = (reqData: ApiRequest<T>): Promise<ApiResponse<T>> => {
@@ -60,5 +73,14 @@ export function useMutationOperation<T extends MutableOperationId>(
     return mutationFn();
   };
 
-  return useMutation(mutateFn);
+  return useMutation(
+    mutateFn,
+    {
+      onSuccess: () => {
+        dependentQueries.forEach((query) => {
+          queryClient.invalidateQueries(query);
+        });
+      },
+    },
+  );
 }

@@ -31,7 +31,9 @@ export default function RoomPage() {
 
   return (
     <Container>
-      {render[roomStatus](roomData!)}
+      {roomStatus === 'success'
+        ? render.success(roomData!.data)
+        : render[roomStatus]()}
       <CommentForm roomId={roomid} />
       <CommentFeed roomId={roomid} />
     </Container>
