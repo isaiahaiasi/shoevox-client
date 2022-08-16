@@ -12,7 +12,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <div className="bg-black text-white h-full overflow-auto flex flex-col">
+        <div className="bg-black text-white h-full overflow-auto flex flex-col pb-10">
           <AuthProvider>
             <RouteSwitch />
           </AuthProvider>

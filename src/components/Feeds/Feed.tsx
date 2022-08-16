@@ -1,8 +1,8 @@
 import { PaginatedOperationId } from '@isaiahaiasi/voxelatlas-spec/public/paginatedOperationId';
 import { ApiRequest, PaginatedResponseData } from '@isaiahaiasi/voxelatlas-spec/public/types';
-import { useInfiniteQueryOperation } from '../hooks/useFetch';
-import PaginatedData from './PaginatedData';
-import { Button } from './Primitives';
+import { useInfiniteQueryOperation } from '../../hooks/useFetch';
+import PaginatedData from '../PaginatedData';
+import { Button } from '../Primitives';
 
 interface FeedProps<S extends PaginatedOperationId> {
   operationId: S;
@@ -38,7 +38,7 @@ export default function Feed<S extends PaginatedOperationId>({
             pages={data.pages}
             renderFn={render.success}
           />
-          <div className="flex justify-center">
+          <div className="flex justify-center pt-2">
             <Button
               variant="outlined"
               disabled={!hasNextPage || isFetchingNextPage}

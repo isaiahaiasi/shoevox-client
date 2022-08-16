@@ -40,10 +40,17 @@ export default function Room({ room }: RoomProps) {
         </Typography.Header>
         <div className={`rounded-lg h-36 bg-gradient-to-r ${bgGradientFrom} ${bgGradientTo}`} />
         <Typography.Caption>
-          <div className="text-right">
-            Created {timestamp} by
-            {' '}
-            <UserLink user={room.creator} />
+          <div className="flex justify-between">
+            <div>
+              <span>{room.commentCount} Comments</span>
+              {', '}
+              <span>{room.likeCount} Likes</span>
+            </div>
+            <div>
+              Created {timestamp} by
+              {' '}
+              <UserLink user={room.creator} />
+            </div>
           </div>
         </Typography.Caption>
       </Container>

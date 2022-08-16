@@ -2,11 +2,11 @@ import {
   Navigate, Route, Routes, useLocation,
 } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
-import Dashboard from './Dashboard';
+import Dashboard from './Feeds/Dashboard';
 import Nav from './Nav';
 import NotFound from './NotFound';
 import RoomPage from './RoomPage';
-import UserFeed from './UserFeed';
+import UserFeed from './Feeds/UserFeed';
 import Welcome from './Welcome';
 
 function LoggedOutRoutes() {

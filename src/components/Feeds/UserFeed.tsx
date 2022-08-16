@@ -1,13 +1,13 @@
 import { Dto } from '@isaiahaiasi/voxelatlas-spec';
 import { useParams } from 'react-router-dom';
-import { useQueryOperation } from '../hooks/useFetch';
-import { getTimestampText } from '../utils/dateUtils';
-import ErrorAlert from './ErrorAlert';
+import { useQueryOperation } from '../../hooks/useFetch';
+import { getTimestampText } from '../../utils/dateUtils';
+import ErrorAlert from '../ErrorAlert';
 import Feed from './Feed';
-import { Container, Typography } from './Primitives';
-import Room from './Room';
-import { FeedSkeleton, RoomSkeleton } from './Skeletons';
-import Skeleton from './Skeletons/Skeleton';
+import { Container, Typography } from '../Primitives';
+import Room from '../Room';
+import { FeedSkeleton, RoomSkeleton } from '../Skeletons';
+import Skeleton from '../Skeletons/Skeleton';
 
 const LIMIT = 5;
 
@@ -32,12 +32,12 @@ export default function UserFeed() {
 
   const { data } = useQueryOperation('getUserById', requestData);
 
-  const timestamp = data?.createdAt ? getTimestampText(data.createdAt) : null;
+  const timestamp = data?.data.createdAt ? getTimestampText(data.data.createdAt) : null;
 
   return (
     <Container>
       <Typography.Header level={1}>
-        {data?.username ?? <Skeleton variant="text" />}
+        {data?.data.username ?? <Skeleton variant="text" />}
       </Typography.Header>
       <Typography.Caption>
         Joined {timestamp ?? '???'}

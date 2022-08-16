@@ -1,12 +1,13 @@
 import { Dto } from '@isaiahaiasi/voxelatlas-spec';
 import { useParams } from 'react-router-dom';
 import { useQueryOperation } from '../hooks/useFetch';
-import CommentFeed from './CommentFeed';
+import CommentFeed from './Feeds/CommentFeed';
 import ErrorAlert from './ErrorAlert';
-import CommentForm from './Form/CommentForm';
+import CommentForm from './Forms/CommentForm';
 import { Container } from './Primitives';
 import Room from './Room';
 import { RoomSkeleton } from './Skeletons';
+import LikeFeed from './Feeds/LikeFeed';
 
 const render = {
   success: (room: Dto['Room']) => <Room room={room} />,
@@ -34,6 +35,7 @@ export default function RoomPage() {
       {roomStatus === 'success'
         ? render.success(roomData!.data)
         : render[roomStatus]()}
+      <LikeFeed />
       <CommentForm roomId={roomid} />
       <CommentFeed roomId={roomid} />
     </Container>
