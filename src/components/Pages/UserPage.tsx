@@ -1,23 +1,10 @@
-import { Dto } from '@isaiahaiasi/voxelatlas-spec';
-import { useParams } from 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
 import { useQueryOperation } from '../../hooks/useFetch';
 import { getTimestampText } from '../../utils/dateUtils';
-import ErrorAlert from '../ErrorAlert';
-import Feed from './Feed';
 import { Container, Typography } from '../Primitives';
-import Room from '../Room';
-import { FeedSkeleton, RoomSkeleton } from '../Skeletons';
 import Skeleton from '../Skeletons/Skeleton';
 
-const LIMIT = 5;
-
-const render = {
-  error: () => <ErrorAlert />,
-  loading: () => <FeedSkeleton count={LIMIT} skeleton={<RoomSkeleton />} />,
-  success: (room: Dto['Room']) => <Room room={room} />,
-};
-
-export default function UserFeed() {
+export default function UserPage() {
   const { userid } = useParams();
 
   if (!userid) {
@@ -26,7 +13,7 @@ export default function UserFeed() {
 
   const requestData = {
     params: { userid },
-    query: { limit: String(LIMIT) },
+    query: {},
     body: {},
   };
 
@@ -44,7 +31,8 @@ export default function UserFeed() {
       </Typography.Caption>
       { /* spacer */}
       <div className="h-5" />
-      <Feed reqData={requestData} operationId="getRoomsByUserId" render={render} />
+
+      <Outlet />
     </Container>
   );
 }

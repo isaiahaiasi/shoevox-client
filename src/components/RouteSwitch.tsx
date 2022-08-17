@@ -2,13 +2,14 @@ import {
   Navigate, Route, Routes, useLocation,
 } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
-import Dashboard from './Feeds/Dashboard';
+import Dashboard from './Pages/Dashboard';
 import Nav from './Nav';
 import NotFound from './NotFound';
-import RoomPage from './RoomPage';
-import UserFeed from './Feeds/UserFeed';
+import RoomPage from './Pages/RoomPage';
+import UserFeed from './Feed/UserFeed';
 import Welcome from './Welcome';
-import LikeFeed from './Feeds/LikeFeed';
+import LikeFeed from './Feed/LikeFeed';
+import UserPage from './Pages/UserPage';
 
 function LoggedOutRoutes() {
   const location = useLocation();
@@ -33,10 +34,16 @@ function LoggedInRoutes() {
       <Routes>
         <Route path="/" element={<Navigate to={destination} />} />
         <Route path="/dashboard" element={<Dashboard />} />
+
         <Route path="/r/:roomid" element={<RoomPage />}>
           <Route path="likes" element={<LikeFeed />} />
         </Route>
-        <Route path="/u/:userid" element={<UserFeed />} />
+
+        <Route path="/u/:userid" element={<UserPage />}>
+          <Route path="" element={<UserFeed />} />
+          {/* TODO: friends, likes, comments */}
+        </Route>
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

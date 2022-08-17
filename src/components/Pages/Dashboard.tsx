@@ -1,6 +1,6 @@
 import { Dto } from '@isaiahaiasi/voxelatlas-spec';
 import ErrorAlert from '../ErrorAlert';
-import Feed from './Feed';
+import Feed from '../Feed';
 import { Container, Typography } from '../Primitives';
 import Room from '../Room';
 import { FeedSkeleton, RoomSkeleton } from '../Skeletons';

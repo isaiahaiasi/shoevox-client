@@ -1,13 +1,13 @@
 import { Dto } from '@isaiahaiasi/voxelatlas-spec';
 import { Outlet, useParams } from 'react-router-dom';
-import { useQueryOperation } from '../hooks/useFetch';
-import ErrorAlert from './ErrorAlert';
-import CommentFeed from './Feeds/CommentFeed';
-import CommentForm from './Forms/CommentForm';
-import LikeButton from './LikeButton';
-import { Container, Link } from './Primitives';
-import Room from './Room';
-import { RoomSkeleton } from './Skeletons';
+import { useQueryOperation } from '../../hooks/useFetch';
+import ErrorAlert from '../ErrorAlert';
+import CommentFeed from '../Feed/CommentFeed';
+import CommentForm from '../Forms/CommentForm';
+import LikeButton from '../LikeButton';
+import { Container, Link } from '../Primitives';
+import Room from '../Room';
+import { RoomSkeleton } from '../Skeletons';
 
 const render = {
   success: (room: Dto['Room']) => <Room room={room} />,
