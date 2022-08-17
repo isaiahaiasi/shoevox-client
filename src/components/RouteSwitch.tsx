@@ -10,6 +10,7 @@ import UserFeed from './Feed/UserFeed';
 import Welcome from './Welcome';
 import LikeFeed from './Feed/LikeFeed';
 import UserPage from './Pages/UserPage';
+import CommentFeed from './Feed/CommentFeed';
 
 function LoggedOutRoutes() {
   const location = useLocation();
@@ -36,6 +37,7 @@ function LoggedInRoutes() {
         <Route path="/dashboard" element={<Dashboard />} />
 
         <Route path="/r/:roomid" element={<RoomPage />}>
+          <Route path="" element={<CommentFeed />} />
           <Route path="likes" element={<LikeFeed />} />
         </Route>
 

@@ -2,7 +2,6 @@ import { Dto } from '@isaiahaiasi/voxelatlas-spec';
 import { useParams } from 'react-router-dom';
 import ErrorAlert from '../ErrorAlert';
 import Like from '../Like';
-import { Container, Link, Typography } from '../Primitives';
 import { FeedSkeleton } from '../Skeletons';
 import Skeleton from '../Skeletons/Skeleton';
 import Feed from './Feed';
@@ -28,18 +27,7 @@ export default function LikeFeed() {
     query: { limit: String(LIMIT) },
   };
 
-  // TODO: turn this into a modal, lol...
   return (
-    <Container>
-      <div className="flex justify-between">
-        <Typography.Header level={3}>Liked by</Typography.Header>
-        <Link to="..">(CLOSE)</Link>
-      </div>
-      <Feed
-        render={render}
-        operationId="getLikesByRoomId"
-        reqData={reqData}
-      />
-    </Container>
+    <Feed render={render} operationId="getLikesByRoomId" reqData={reqData} />
   );
 }

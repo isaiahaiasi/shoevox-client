@@ -1,11 +1,11 @@
 import { Dto } from '@isaiahaiasi/voxelatlas-spec';
-import { Outlet, useParams } from 'react-router-dom';
+import { NavLink, Outlet, useParams } from 'react-router-dom';
 import { useQueryOperation } from '../../hooks/useFetch';
 import ErrorAlert from '../ErrorAlert';
-import CommentFeed from '../Feed/CommentFeed';
 import CommentForm from '../Forms/CommentForm';
 import LikeButton from '../LikeButton';
-import { Container, Link } from '../Primitives';
+import { Container } from '../Primitives';
+import { Header } from '../Primitives/Typography';
 import Room from '../Room';
 import { RoomSkeleton } from '../Skeletons';
 
@@ -38,14 +38,31 @@ export default function RoomPage() {
 
       <Container className="flex gap-2 items-center">
         <LikeButton roomId={roomid} />
-        <Link to="likes">{roomData?.data.likeCount ?? '???'} likes</Link>
+        <div className="flex-1">
+          <CommentForm roomId={roomid} />
+        </div>
       </Container>
 
-      {/* LIKE FEED: */}
+      {/* TODO: extract NavLink as Primitive */}
+      <nav className="flex gap-4 pb-4">
+        <Header level={3}>
+          <NavLink
+            to=""
+            end
+            className={({ isActive }) => (isActive ? 'underline' : undefined)}
+          >Comments
+          </NavLink>
+        </Header>
+        <Header level={3}>
+          <NavLink
+            to="likes"
+            className={({ isActive }) => (isActive ? 'underline' : undefined)}
+          >Likes
+          </NavLink>
+        </Header>
+      </nav>
       <Outlet />
 
-      <CommentForm roomId={roomid} />
-      <CommentFeed roomId={roomid} />
     </Container>
   );
 }

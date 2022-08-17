@@ -1,13 +1,9 @@
 import { Dto } from '@isaiahaiasi/voxelatlas-spec';
+import { useParams } from 'react-router-dom';
 import Comment from '../Comment';
 import ErrorAlert from '../ErrorAlert';
 import Feed from './Feed';
-import { Container, Typography } from '../Primitives';
 import { CommentSkeleton, FeedSkeleton } from '../Skeletons';
-
-interface CommentFeedProps {
-  roomId: string;
-}
 
 const operationId = 'getCommentsByRoomId';
 const LIMIT = 10;
@@ -18,17 +14,20 @@ const render = {
   success: (comment: Dto['Comment']) => <Comment comment={comment} />,
 };
 
-export default function CommentFeed({ roomId }: CommentFeedProps) {
+export default function CommentFeed() {
+  const { roomid } = useParams();
+
+  if (!roomid) {
+    throw new Error('roomid path param is required.');
+  }
+
   const reqData = {
-    params: { roomid: roomId },
+    params: { roomid },
     query: { limit: String(LIMIT) },
     body: {},
   };
 
   return (
-    <Container>
-      <Typography.Header level={3}>Comments</Typography.Header>
-      <Feed reqData={reqData} operationId={operationId} render={render} />
-    </Container>
+    <Feed reqData={reqData} operationId={operationId} render={render} />
   );
 }
