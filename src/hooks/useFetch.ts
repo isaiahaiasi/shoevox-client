@@ -78,6 +78,7 @@ export function useMutationOperation<T extends MutableOperationId>(
     {
       onSuccess: () => {
         dependentQueries.forEach((query) => {
+          console.log('invalidating:', query);
           queryClient.invalidateQueries(query);
         });
       },
