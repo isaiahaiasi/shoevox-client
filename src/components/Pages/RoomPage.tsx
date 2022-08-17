@@ -1,11 +1,11 @@
 import { Dto } from '@isaiahaiasi/voxelatlas-spec';
-import { NavLink, Outlet, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useQueryOperation } from '../../hooks/useFetch';
 import ErrorAlert from '../ErrorAlert';
 import CommentForm from '../Forms/CommentForm';
 import LikeButton from '../LikeButton';
+import NestedNavTabs from '../NestedNavTabs';
 import { Container } from '../Primitives';
-import { Header } from '../Primitives/Typography';
 import Room from '../Room';
 import { RoomSkeleton } from '../Skeletons';
 
@@ -43,25 +43,12 @@ export default function RoomPage() {
         </div>
       </Container>
 
-      {/* TODO: extract NavLink as Primitive */}
-      <nav className="flex gap-4 pb-4">
-        <Header level={3}>
-          <NavLink
-            to=""
-            end
-            className={({ isActive }) => (isActive ? 'underline' : undefined)}
-          >Comments
-          </NavLink>
-        </Header>
-        <Header level={3}>
-          <NavLink
-            to="likes"
-            className={({ isActive }) => (isActive ? 'underline' : undefined)}
-          >Likes
-          </NavLink>
-        </Header>
-      </nav>
-      <Outlet />
+      <NestedNavTabs
+        tabs={[
+          { to: '', text: 'Comments' },
+          { to: 'likes', text: 'Likes' },
+        ]}
+      />
 
     </Container>
   );
