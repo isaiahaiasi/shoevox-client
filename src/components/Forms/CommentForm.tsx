@@ -30,6 +30,7 @@ export default function CommentForm({ roomId }: CommentFormProps) {
     <form onSubmit={handleSubmit} className="flex p-4 gap-2">
       <Input.Text
         name="content"
+        placeholder="Add your comment"
         id="content"
         className="flex-1"
       />
