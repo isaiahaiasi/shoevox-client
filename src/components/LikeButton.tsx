@@ -7,6 +7,7 @@ interface LikeButtonProps {
 }
 
 interface RemoveLikeButtonProps {
+  roomId: string;
   likeId: string;
 }
 
@@ -42,7 +43,7 @@ function AddLikeButton({ roomId }: LikeButtonProps) {
   );
 }
 
-function RemoveLikeButton({ likeId }: RemoveLikeButtonProps) {
+function RemoveLikeButton({ likeId, roomId }: RemoveLikeButtonProps) {
   const deleteLikeReqData = {
     ...baseReqData,
     params: {
@@ -50,12 +51,19 @@ function RemoveLikeButton({ likeId }: RemoveLikeButtonProps) {
     },
   };
 
+  const dependentReqData = {
+    ...baseReqData,
+    params: {
+      roomid: roomId,
+    },
+  };
+
   const { mutate } = useMutationOperation(
     'deleteLike',
     [
       ['getLike'], // Don't really want to pass getLikeReqData just for this...
-      getQueryKey('getRoomById', deleteLikeReqData),
-      getQueryKey('getLikesByRoomId', deleteLikeReqData),
+      getQueryKey('getRoomById', dependentReqData),
+      getQueryKey('getLikesByRoomId', dependentReqData),
     ],
   );
 
@@ -68,10 +76,6 @@ function RemoveLikeButton({ likeId }: RemoveLikeButtonProps) {
   );
 }
 
-// TODO: CURRENTLY BROKEN
-// If getLike 404s, that breaks everything!!!
-// I don't really know what to do about that???
-// I might need to rewrite all of my response types to handle non-200 responses...
 export default function LikeButton({ roomId }: LikeButtonProps) {
   const { user } = useAuth();
 
@@ -87,11 +91,12 @@ export default function LikeButton({ roomId }: LikeButtonProps) {
     },
   };
 
+  // Using this query is a little goofy, because the "expected" result is 404...
   const { data } = useQueryOperation('getLike', getLikeReqData);
 
   const alreadyLiked = !!(data?.data);
 
   return alreadyLiked
-    ? <RemoveLikeButton likeId={data.data.id} />
+    ? <RemoveLikeButton likeId={data.data.id} roomId={roomId} />
     : <AddLikeButton roomId={roomId} />;
 }

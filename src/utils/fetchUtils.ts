@@ -79,9 +79,20 @@ export function getFetch<OpId extends OperationId>(
 
   const url = getUrl(operationId, { query, params });
 
-  const queryFn = (): Promise<ApiResponse<OpId>> => fetch(url, requestInit)
-    .then((res) => res.json())
-    .then((res) => responses[operationId].parse(res));
+  const queryFn = async (): Promise<ApiResponse<OpId> | null> => {
+    const res = await fetch(url, requestInit);
+
+    if (res.status !== 200) {
+      // TODO: Handle Errors from API
+      return null;
+    }
+
+    const json = await res.json();
+
+    console.log('successful response:', operationId, res, json);
+
+    return responses[operationId].parse(json);
+  };
 
   return queryFn;
 }

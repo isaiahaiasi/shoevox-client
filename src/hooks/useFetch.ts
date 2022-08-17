@@ -67,7 +67,7 @@ export function useMutationOperation<T extends MutableOperationId>(
 
   const reqOptions = getRequestOptions(operationId);
 
-  const mutateFn = (reqData: ApiRequest<T>): Promise<ApiResponse<T>> => {
+  const mutateFn = (reqData: ApiRequest<T>): Promise<ApiResponse<T> | null> => {
     reqOptions.body = JSON.stringify(reqData.body);
     const mutationFn = getFetch(operationId, reqData, reqOptions);
     return mutationFn();
