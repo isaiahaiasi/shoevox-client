@@ -10,7 +10,7 @@
     "lint": "eslint src"
   },
   "dependencies": {
-    "@isaiahaiasi/voxelatlas-spec": "^0.2.15",
+    "@isaiahaiasi/voxelatlas-spec": "^0.2.17",
     "@tanstack/react-query": "^4.0.10",
     "@tanstack/react-query-devtools": "^4.0.10",
     "date-fns": "^2.29.1",

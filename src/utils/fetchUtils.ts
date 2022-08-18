@@ -10,6 +10,12 @@ type GenericRequestData = {
   body?: Record<string, any>;
 };
 
+export const BASE_REQ_DATA = {
+  body: {},
+  params: {},
+  query: {},
+};
+
 export const BASE_FETCH_OPTIONS: RequestInit = {
   credentials: 'include',
   headers: {

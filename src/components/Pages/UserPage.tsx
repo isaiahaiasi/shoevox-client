@@ -1,6 +1,7 @@
-import { Outlet, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useQueryOperation } from '../../hooks/useFetch';
 import { getTimestampText } from '../../utils/dateUtils';
+import NestedNavTabs from '../NestedNavTabs';
 import { Container, Typography } from '../Primitives';
 import Skeleton from '../Skeletons/Skeleton';
 
@@ -32,7 +33,11 @@ export default function UserPage() {
       { /* spacer */}
       <div className="h-5" />
 
-      <Outlet />
+      <NestedNavTabs tabs={[
+        { to: '', text: 'Rooms' },
+        { to: 'likes', text: 'Liked' },
+      ]}
+      />
     </Container>
   );
 }
