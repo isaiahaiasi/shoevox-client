@@ -13,6 +13,7 @@ import UserPage from './Pages/UserPage';
 import CommentFeed from './Feed/CommentFeed';
 import UserLikeFeed from './Feed/UserLikeFeed';
 import AllRoomsPage from './Pages/AllRoomsPage';
+import FriendFeed from './Feed/FriendFeed';
 
 function LoggedOutRoutes() {
   const location = useLocation();
@@ -48,6 +49,7 @@ function LoggedInRoutes() {
         <Route path="/u/:userid" element={<UserPage />}>
           <Route path="" element={<UserFeed />} />
           <Route path="likes" element={<UserLikeFeed />} />
+          <Route path="friends" element={<FriendFeed />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />

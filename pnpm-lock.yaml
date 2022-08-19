@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@isaiahaiasi/voxelatlas-spec': ^0.2.17
+  '@isaiahaiasi/voxelatlas-spec': ^0.2.24
   '@tanstack/react-query': ^4.0.10
   '@tanstack/react-query-devtools': ^4.0.10
   '@types/react': ^18.0.0
@@ -32,7 +32,7 @@ specifiers:
   zod: ^3.17.9
 
 dependencies:
-  '@isaiahaiasi/voxelatlas-spec': 0.2.17
+  '@isaiahaiasi/voxelatlas-spec': 0.2.24
   '@tanstack/react-query': 4.0.10_biqbaboplfbrettd7655fr4n2y
   '@tanstack/react-query-devtools': 4.0.10_react@18.2.0
   date-fns: 2.29.1
@@ -383,8 +383,8 @@ packages:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
 
-  /@isaiahaiasi/voxelatlas-spec/0.2.17:
-    resolution: {integrity: sha512-c0CGU9sQdbZKuZ/2kPp2jQzjmhdZWvKRuTUMZ4DMnCtaXroZkZqOQOjuug+vD4bKngxh5qwh+LK5+FSrsm3cfA==}
+  /@isaiahaiasi/voxelatlas-spec/0.2.24:
+    resolution: {integrity: sha512-dPPjbwz/X0BhFB5DBqDrszjxeepMMQoZUTDX38/TMdnMdX8l+o64fh13iRpokyves0mImHr3fsH+Ot+/RKGEaw==}
     engines: {node: '>=16.0.0'}
     dependencies:
       typescript: 4.7.4

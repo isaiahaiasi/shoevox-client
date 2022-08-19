@@ -20,7 +20,7 @@ export default function UserPage() {
 
   const { data } = useQueryOperation('getUserById', requestData);
 
-  const timestamp = data?.data.createdAt ? getTimestampText(data.data.createdAt) : null;
+  const timestampText = data?.data.createdAt ? getTimestampText(data.data.createdAt) : '???';
 
   return (
     <Container>
@@ -28,7 +28,7 @@ export default function UserPage() {
         {data?.data.username ?? <Skeleton variant="text" />}
       </Typography.Header>
       <Typography.Caption>
-        Joined {timestamp ?? '???'}
+        Joined {timestampText}
       </Typography.Caption>
       { /* spacer */}
       <div className="h-5" />
@@ -36,6 +36,7 @@ export default function UserPage() {
       <NestedNavTabs tabs={[
         { to: '', text: 'Rooms' },
         { to: 'likes', text: 'Liked' },
+        { to: 'friends', text: 'Friends' },
       ]}
       />
     </Container>
